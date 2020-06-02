@@ -27,7 +27,9 @@ from clara.clustering import Clustering
 from clara.model import expr_to_dict, dict_to_expr
 from clara.parser import getlangparser
 from clara.repair import Repair
-
+#Checking imports 
+#from New_functions.built_in_functions import Interaction_module
+from New_functions.feedback_analysis import feedback_channelizer
 VERBOSE=0
 
 class Clara(object):
@@ -325,7 +327,9 @@ Options are:
                 self.error('max cost exceeded (%d > %d)',
                            feed.cost, self.maxfeedcost)
             for f in feed.feedback:
-                print('*', f)
+                #print('*', f)
+                #Interaction_module(f)
+                feedback_channelizer(f, self.ins, self.args, self.lang)
                 
         elif feed.status == Feedback.STATUS_ERROR:
             self.error(feed.error)
