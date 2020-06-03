@@ -27,8 +27,7 @@ from clara.clustering import Clustering
 from clara.model import expr_to_dict, dict_to_expr
 from clara.parser import getlangparser
 from clara.repair import Repair
-#Checking imports 
-#from New_functions.built_in_functions import Interaction_module
+#New imports
 from New_functions.feedback_analysis import feedback_channelizer
 VERBOSE=0
 
@@ -73,6 +72,7 @@ Options are:
                      than N, an error occurs
                      (default is 0, which means that there is no limit)
   --clusterdir DIR   directory to write/read clustering results
+  --feedback_channelizer [0|1] Whether to have a detailed explained feedback(default is 1)
 '''
 
     def __init__(self):
@@ -133,6 +133,8 @@ Options are:
         self.suboptimal = int(self.opts.pop('suboptimal', 1))
         self.maxfeedcost = int(self.opts.pop('maxfeedcost', 0))
         self.clusterdir = self.opts.pop('clusterdir', 'clusters')
+        #adding a new flag
+        self.feedback_channelizer = int(self.opts.pop('feedback_channelizer', 1))
 
         self.poolsize = self.opts.pop('poolsize', None)
         if self.poolsize is not None:
@@ -277,7 +279,7 @@ Options are:
         print()
 
         inter = self.inter(entryfnc=self.entryfnc)
-        trace = inter.run(self.models[0], args=self.args, ins=self.ins)
+        trace = inter.run(self.models[1], args=self.args, ins=self.ins)
 
         print(trace)
 
@@ -327,9 +329,10 @@ Options are:
                 self.error('max cost exceeded (%d > %d)',
                            feed.cost, self.maxfeedcost)
             for f in feed.feedback:
-                #print('*', f)
-                #Interaction_module(f)
-                feedback_channelizer(f, self.ins, self.args, self.lang)
+                if self.feedback_channelizer == 1:
+                    feedback_channelizer(f, self.ins, self.args, self.lang)
+                else:
+                    print('*',f)
                 
         elif feed.status == Feedback.STATUS_ERROR:
             self.error(feed.error)
