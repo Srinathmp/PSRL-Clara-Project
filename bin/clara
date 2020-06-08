@@ -28,7 +28,7 @@ from clara.model import expr_to_dict, dict_to_expr
 from clara.parser import getlangparser
 from clara.repair import Repair
 #New imports
-from New_functions.feedback_analysis import feedback_channelizer
+from New_functions.feedback_analysis import feedback_channelizer,compute_cost
 VERBOSE=0
 
 class Clara(object):
@@ -278,8 +278,9 @@ Options are:
         print(self.models[0])
         print()
 
+
         inter = self.inter(entryfnc=self.entryfnc)
-        trace = inter.run(self.models[1], args=self.args, ins=self.ins)
+        trace = inter.run(self.models[0], args=self.args, ins=self.ins)
 
         print(trace)
 
@@ -324,21 +325,31 @@ Options are:
             cleanstrings=self.cleanstrings,
             entryfnc=self.entryfnc)
 
+        #Added to trace using interpreter
+        inter = self.inter(entryfnc=self.entryfnc)
+
         if feed.status == Feedback.STATUS_REPAIRED:
             if self.maxfeedcost > 0 and feed.cost > self.maxfeedcost:
                 self.error('max cost exceeded (%d > %d)',
                            feed.cost, self.maxfeedcost)
+            feedback_list = []
             for f in feed.feedback:
-                if self.feedback_channelizer == 1:
-                    feedback_channelizer(f, self.ins, self.args, self.lang)
-                else:
-                    print('*',f)
+                feedback_list.append(f)
+            compute_cost(feedback_list,self.models,inter,self.args,self.ins)
+
                 
         elif feed.status == Feedback.STATUS_ERROR:
             self.error(feed.error)
 
         else:
             self.error(feed.statusstr())
+
+
+        for f in feedback_list:
+            if self.feedback_channelizer == 1:
+                feedback_channelizer(f, self.models, inter,self.ins, self.args, self.lang)
+            else:
+                print('*',f)
 
     def guess_lang(self):
         '''
