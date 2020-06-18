@@ -20,9 +20,9 @@ int fact(int num)
 {
     int k = 1, i;
     // factorial of 0 is 1
-    if (num == 0)
+    if (num != 0)
     {
-        return(k);
+        return 1;
     }
     else
     {

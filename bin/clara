@@ -72,7 +72,7 @@ Options are:
                      than N, an error occurs
                      (default is 0, which means that there is no limit)
   --clusterdir DIR   directory to write/read clustering results
-  --feedback_channelizer [0|1] Whether to have a detailed explained feedback(default is 1)
+  --feedback_channelizer [0|1] Whether to have a detailed explained feedback, for feedtype as default(default is 0)
 '''
 
     def __init__(self):
@@ -134,7 +134,7 @@ Options are:
         self.maxfeedcost = int(self.opts.pop('maxfeedcost', 0))
         self.clusterdir = self.opts.pop('clusterdir', 'clusters')
         #adding a new flag
-        self.feedback_channelizer = int(self.opts.pop('feedback_channelizer', 1))
+        self.feedback_channelizer = int(self.opts.pop('feedback_channelizer', 0))
 
         self.poolsize = self.opts.pop('poolsize', None)
         if self.poolsize is not None:
@@ -270,19 +270,66 @@ Options are:
             print("MOD:", f.name)
             self.dump_exprs(f)
 
+     #-------------------------------------------------------------------
+    def info_from_trace(self,trace):
+        final_dict={}
+        for i in range(len(trace)):
+            if (trace[i][0],trace[i][1]) not in final_dict.keys(): #have to see the else part later whether req or not
+                inner_tr_dict={}
+                temp_keylist=list(trace[i][2].keys())
+                for k in range(len(temp_keylist)):
+                    new_key=temp_keylist[k].strip(' ').strip('"').strip("'")
+                    if new_key not in inner_tr_dict.keys():
+                        inner_tr_dict[new_key]=[trace[i][2][temp_keylist[k]]]
+                    else:
+                        inner_tr_dict[new_key].append(trace[i][2][temp_keylist[k]])
+                # final_dict[(trace[i][0],trace[i][1])]=trace[i][2]
+                final_dict[(trace[i][0],trace[i][1])]=inner_tr_dict
+        #print(final_dict)      
+        #print('final_dict=',final_dict[list(final_dict.keys())[0]]) # has the structured trace without the impl of colon issue..!
+        self.variable_trace(final_dict)
+#-------------------------------------------------------------------
+    def variable_trace(self,final_dict):
+        var_dict = {}
+        for i in list(final_dict.keys()):
+            for j in list(final_dict[i].keys()):
+                a_dict = final_dict[i]
+                if(j not in list(var_dict.keys())):
+                    var_dict[j] = []
+                    var_dict[j].append(a_dict[j])
+                else:
+                    var_dict[j].append(a_dict[j])
+        res = 1
+        while(res):
+            print('Do you want to view the trace of any variable? Type yes or no ')
+            response = input()
+            if((response == 'YES') or (response == 'Yes') or (response == 'y') or (response == 'Y') or (response == 'yes')):
+                res = 1
+                print('The variables are =',list(var_dict.keys()),'\nEnter the variable whose trace you want to see')
+                user_varible = input()
+                #print(user_varible)
+                print('The variables trace of',user_varible,' is =',var_dict[user_varible])
+            else:
+                res = 0
+            
+        
+
+#-------------------------------------------------------------------
+                
     def eval(self):
 
         if len(self.models) != 1:
             self.error('Eval requires exactly one program!')
 
-        print(self.models[0])
-        print()
+        # print(self.models[0])
+        # print()
 
 
         inter = self.inter(entryfnc=self.entryfnc)
         trace = inter.run(self.models[0], args=self.args, ins=self.ins)
 
         print(trace)
+        self.info_from_trace(trace)
 
     def repair(self):
 
@@ -325,6 +372,12 @@ Options are:
             cleanstrings=self.cleanstrings,
             entryfnc=self.entryfnc)
 
+        ### feed[0] holds the program in cluster which is referenced
+        ### Changed the return of generate function in feedback.py
+        # print(feed[0])
+        # print("\n---------------------------------------------------------------\n")
+        rep_prog = feed[0]
+        feed = feed[1]
         #Added to trace using interpreter
         inter = self.inter(entryfnc=self.entryfnc)
 
@@ -335,7 +388,8 @@ Options are:
             feedback_list = []
             for f in feed.feedback:
                 feedback_list.append(f)
-            compute_cost(feedback_list,self.models,inter,self.args,self.ins)
+            if self.feedback_channelizer == 1 and self.feedtype != SimpleFeedback:
+                compute_cost(feedback_list,self.models,rep_prog,inter,self.args,self.ins)
 
                 
         elif feed.status == Feedback.STATUS_ERROR:
@@ -344,10 +398,12 @@ Options are:
         else:
             self.error(feed.statusstr())
 
-
+        feed_no = 0
+        # sort the repairs based on cost (in list feedback_list)
         for f in feedback_list:
-            if self.feedback_channelizer == 1:
-                feedback_channelizer(f, self.models, inter,self.ins, self.args, self.lang)
+            if self.feedback_channelizer == 1 and self.feedtype != SimpleFeedback:
+                feed_no = feed_no +1
+                feedback_channelizer(f, feed_no, self.models, rep_prog, inter,self.ins, self.args, self.lang)
             else:
                 print('*',f)
 
@@ -460,7 +516,6 @@ Options are:
         for src in self.sources:
             model = self.process_source(src)
             self.models.append(model)
-                
 
 if __name__ == '__main__':
     try:
@@ -472,3 +527,5 @@ if __name__ == '__main__':
         if VERBOSE:
             traceback.print_exc()
         sys.exit(1)
+
+

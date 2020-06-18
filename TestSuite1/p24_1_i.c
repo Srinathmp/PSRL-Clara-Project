@@ -15,7 +15,7 @@ int main(){
       reverse_num=0;
       while(temp){
          rem=temp%10;
-         temp=temp/10;
+         //temp=temp/10;
          reverse_num=reverse_num*10+rem;
       }
       if(num==reverse_num)

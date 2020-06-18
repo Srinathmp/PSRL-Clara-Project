@@ -285,9 +285,10 @@ class FeedGen(object):
                 assert False, 'unknown status: %s' % (res.statusstr(),)
 
         # Return best repaired if there are any
+        ### Note : changed the return from feedbacks[0][1] to feedbacks[0]
         if len(feedbacks) > 0:
             feedbacks.sort()
-            return feedbacks[0][1]
+            return feedbacks[0]
 
         # Otherwise return something remembered
         return feedback
