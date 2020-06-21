@@ -1,5 +1,5 @@
 def computeDeriv(poly):
   result = []
-  for i in range(len(poly)):
+  for i in poly:
     result[i]=float((i)*poly[i])
   return result

@@ -28,7 +28,7 @@ from clara.model import expr_to_dict, dict_to_expr
 from clara.parser import getlangparser
 from clara.repair import Repair
 #New imports
-from New_functions.feedback_analysis import feedback_channelizer,compute_cost
+from New_functions.feedback_analysis import feedback_channelizer,compute_cost, sort_repair_cost
 VERBOSE=0
 
 class Clara(object):
@@ -390,6 +390,16 @@ Options are:
                 feedback_list.append(f)
             if self.feedback_channelizer == 1 and self.feedtype != SimpleFeedback:
                 compute_cost(feedback_list,self.models,rep_prog,inter,self.args,self.ins)
+                #feedback_list = sort_repair_cost(feedback_list)
+
+            feed_no = 0
+            # sort the repairs based on cost (in list feedback_list)
+            for f in feedback_list:
+                if self.feedback_channelizer == 1 and self.feedtype != SimpleFeedback:
+                    feed_no = feed_no +1
+                    feedback_channelizer(f, feed_no, self.models, rep_prog, inter,self.ins, self.args, self.lang)
+                else:
+                    print('*',f)
 
                 
         elif feed.status == Feedback.STATUS_ERROR:
@@ -398,14 +408,6 @@ Options are:
         else:
             self.error(feed.statusstr())
 
-        feed_no = 0
-        # sort the repairs based on cost (in list feedback_list)
-        for f in feedback_list:
-            if self.feedback_channelizer == 1 and self.feedtype != SimpleFeedback:
-                feed_no = feed_no +1
-                feedback_channelizer(f, feed_no, self.models, rep_prog, inter,self.ins, self.args, self.lang)
-            else:
-                print('*',f)
 
     def guess_lang(self):
         '''

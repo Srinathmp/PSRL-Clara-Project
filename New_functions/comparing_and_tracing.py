@@ -2,6 +2,7 @@ from clara.interpreter import getlanginter
 from New_functions.documenting import return_explanation
 import sys
 import string
+import re
 
 def compare_outputs(programs, inter,args, ins):
 	# print("Arguements are : ", args)
@@ -79,7 +80,7 @@ def incorrect_return(clara_feedback, programs,rep_prog, inter, args, ins):
 	if reply == '1':
 		# extracting the index of the referenced program to generate repair 
 		referenced_prog = rep_prog[1]
-		print(referenced_prog)
+		#print(referenced_prog)
 		index = 1
 		if '.c' in referenced_prog:
 			index = referenced_prog.split('.c')[0][-1] #This gives the representative program number in cluster
@@ -163,16 +164,20 @@ def display_location(clara_feedback):
 				' inside the else-branch starting ',' the condition of ', ' *after* the ',
 				' update of the ',' inside the body of the ', ' at ', ' at line ']
 
+	place = 0
 	for loc in diff_locs:
 		if loc in clara_feedback:
 			place = loc
 			segment = clara_feedback.split(loc)[1]
 			break
 
-	segment = place + segment
-	location = segment.split(" (cost")[0]
-	
-	return location
+	if place != 0:
+		segment = place + segment
+		location = segment.split(" (cost")[0]
+		
+		return location
+	else:
+		print("Couldn't trace exact location, it would be displayed in the final repair\n")
 
 
 '''
