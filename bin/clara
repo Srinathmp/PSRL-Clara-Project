@@ -377,9 +377,10 @@ Options are:
         ### feed[0] holds the program in cluster which is referenced
         ### Changed the return of generate function in feedback.py
         # print(feed[0])
-        # print("\n---------------------------------------------------------------\n")
-        rep_prog = feed[0]
-        feed = feed[1]
+        #print("\n---------------------------------------------------------------\n")
+        if type(feed) == tuple:
+            rep_prog = feed[0]
+            feed = feed[1]
         #Added to trace using interpreter
         inter = self.inter(entryfnc=self.entryfnc)
 
