@@ -69,14 +69,16 @@ def ift_feedback(clara_feedback, ins,args, lang):
 		print(clara_feedback,"\n")
 		print("****************************************************\n")
 	elif reply == 0:
-		sys.exit("*** Happy Coding!!! ***\n")
+		print("*** Happy Coding!!! ***\n")
+		return 0
 
 def incorrect_conditional_exp(clara_feedback, ins, args):
 	print("\nLooks like you have used incorrect conditional expression.\n")
 	print("**To know what is conditional expression in brief press 1, else press 0 to exit**\n")
 	reply = int(input())
 	if reply == 0:
-		sys.exit("*** Happy Coding!!! ***\n")
+		print("*** Happy Coding!!! ***\n")
+		return reply
 	elif reply == 1:
 		print("----------------------------------------------------------------------\n")
 		print(conditional_statement.__doc__)

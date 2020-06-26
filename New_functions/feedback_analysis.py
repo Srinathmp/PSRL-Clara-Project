@@ -1,6 +1,6 @@
 #Wrapper function which decides whether the feedback is provided for python or C program
 
-import sys
+#import sys
 import re
 import keyword
 from New_functions.built_in_functions import Interaction_module
@@ -68,7 +68,8 @@ def compute_cost(feedback_list, programs,rep_prog, inter,args, ins):
 		print("If you still prefer to look at repairs, press any key, to exit press 0")
 		reply = input()
 		if reply == '0':
-			sys.exit("*** Happy Coding!!! ***\n")
+			print("*** Happy Coding!!! ***\n")
+			return 0
 
 def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inputs, arguements, lang):
 	try:
@@ -98,7 +99,8 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 					print("****************************************************\n")
 					return 
 				elif reply == '0':
-					sys.exit("*** Happy Coding!!! ***\n")
+					print("*** Happy Coding!!! ***\n")
+					return 0
 				else:
 					return 
 
@@ -129,7 +131,7 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 						bltins_error.append(blt)
 
 				if ' for loop ' in clara_feedback:
-					print("There is incorrect expression used in for loop\n")
+					print("There is an incorrect iterated expression used in for loop\n")
 					print("To know about for loop press 1, else press any key to continue :\n")
 					choice = input()
 					if choice == '1':
@@ -143,9 +145,12 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 					print("yes/no\n")
 					reply = input()
 					if(reply == 'no' or reply == 'No' or reply == 'NO'):
-						sys.exit("Nice!!! You don't want to giveup so easily. Happy coding!")
+						print("Nice!!! You don't want to giveup so easily. Happy coding!")
+						return 0
 					elif(reply == 'yes' or reply == 'Yes' or reply == 'YES'):
-						Interaction_module(clara_feedback,bltins_error[0],arguements)
+						status = Interaction_module(clara_feedback,bltins_error[0],arguements)
+						if status == 0:
+							return 0
 					return 
 
 
@@ -173,7 +178,8 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 				print("Press 1 for exhaustive feedback phase, orelse press 0 to exit\n")
 				reply_1 = input()
 				if(reply_1 == '0'):
-					sys.exit("*** Happy Coding!!! ***\n")
+					print("*** Happy Coding!!! ***\n")
+					return 0
 				else:
 					ift_feedback(clara_feedback, inputs, arguements, lang)
 				return
@@ -181,7 +187,9 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 
 			#incorrect conditional statements($cond)
 			if '$cond' in clara_feedback:
-				incorrect_conditional_exp(clara_feedback, arguements, inputs)
+				status = incorrect_conditional_exp(clara_feedback, arguements, inputs)
+				if status == 0:
+					return 0
 
 			#check for incorrect return value
 			if ('return' in clara_feedback) or ('$ret' in clara_feedback):
@@ -190,11 +198,14 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 					print("Since there was 'if' statements involved, press 1 to read about it")
 					ans = input()
 					if ans == '1':
-						ift_feedback(clara_feedback, inputs, arguements, lang)
+						status = ift_feedback(clara_feedback, inputs, arguements, lang)
+						if status == 0:
+							return 0
 				print("Press 1 to continue with possible any further related repairs, else press 0 to exit")
 				reply = int(input())
 				if reply == 0:
-					sys.exit("*** Happy Coding!!! ***\n")
+					print("*** Happy Coding!!! ***\n")
+					return 0
 
 			#incorrect use of operators	
 			if not(considered):
@@ -212,15 +223,12 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 					if (op in segments[0] and op not in segments[1]) or (op not in segments[0] and op in segments[1]): #This is feasible for single operator error
 						if op in arithmetic_operators:
 							operator = arithmetic_operators_dict[op]+' ('+op+')'
-							feedback_arth_operator(segments,operator,clara_feedback, inputs, arguements)
-							return 
+							return feedback_arth_operator(segments,operator,clara_feedback, inputs, arguements) 
 						elif op in comparison_operators:
 							operator = comparison_operators_dict[op]+' ('+op+')'
-							feedback_comp_operator(segments,operator,clara_feedback, inputs, arguements)
-							return
+							return feedback_comp_operator(segments,operator,clara_feedback, inputs, arguements)
 						elif op in logical_operators:
-							feedback_logic_operator(segments, op,clara_feedback, inputs, arguements) 
-							return
+							return feedback_logic_operator(segments, op,clara_feedback, inputs, arguements) 
 
 				#incorrect use of values
 				# using re.findall() 
@@ -229,8 +237,7 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 				num2 = re.findall(r'\d+', segments[1]) 
 				if num1 != [] and num2 != []: 
 					if(num1[0] != num2[0]):
-						feedback_incorrect_value(num1[0], num2[0], clara_feedback, inputs, arguements)
-						return
+						return feedback_incorrect_value(num1[0], num2[0], clara_feedback, inputs, arguements)
 				elif num1 != [] or num2 != []:
 					print("There might be an incorrect initialization.")
 					print("It is recommended that you dry run through code look for right initialization")
@@ -248,7 +255,8 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 				print(clara_feedback,"\n")
 				print("****************************************************\n")
 			elif reply == 0:
-				sys.exit("*** Happy Coding!!! ***\n")
+				print("*** Happy Coding!!! ***\n")
+				return 0
 			#FOR most of feedbacks can compare between incorrect and correction expression given in feedback 
 	except Exception as err:
 		print(err)
@@ -258,9 +266,8 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 			print(clara_feedback,"\n")
 			print("****************************************************\n")
 		else:
-			sys.exit("*** Happy Coding!!! ***\n")
-
-
+			print("*** Happy Coding!!! ***\n")
+			return 0
 
 
 

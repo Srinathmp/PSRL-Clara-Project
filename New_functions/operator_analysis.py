@@ -2,7 +2,7 @@
 #Challenge to give a good explanation and reason behind the operator error occured, would like to look at 
 #test case output for giving comparison between change in output with operator change
 from New_functions.documenting import arithmetic_op, relational_op
-import sys
+#import sys
 
 def feedback_comp_operator(segments, operator,clara_feedback,ins, args):
 	op = operator.split(' (')[1].split(')')[0]
@@ -27,7 +27,8 @@ def feedback_comp_operator(segments, operator,clara_feedback,ins, args):
 		print("\nThe feedback generated is : ")
 		print(clara_feedback, "\n")
 	else:
-		sys.exit("\nHappy Coding!!!\n")
+		print("*** Happy Coding!!! ***\n")
+		return 0
 
 def feedback_arth_operator(segments,operator,clara_feedback,ins, args): #depending on whether args passed or ins passed use accordingly
 	op = operator.split(' (')[1].split(')')[0]																		#accordingly one of them will be None
@@ -51,7 +52,8 @@ def feedback_arth_operator(segments,operator,clara_feedback,ins, args): #dependi
 		print(clara_feedback,"\n")
 		print("****************************************************\n")
 	else:
-		sys.exit("\nHappy Coding!!!\n")
+		print("*** Happy Coding!!! ***\n")
+		return 0
 
 def feedback_logic_operator(segments, operator, clara_feedback,ins, args):
 	if operator in segments[0]:
@@ -67,7 +69,8 @@ def feedback_logic_operator(segments, operator, clara_feedback,ins, args):
 		print(clara_feedback,"\n")
 		print("****************************************************\n")
 	else:
-		sys.exit("\nHappy Coding!!!\n")
+		print("*** Happy Coding!!! ***\n")
+		return 0
 
 def feedback_incorrect_value(n1, n2, clara_feedback,ins, args):
 	print("Looks like you have used incorrect constant value")
@@ -82,4 +85,5 @@ def feedback_incorrect_value(n1, n2, clara_feedback,ins, args):
 		print(clara_feedback,"\n")
 		print("****************************************************\n")
 	else:
-		sys.exit("\nHappy Coding!!!\n")
+		print("*** Happy Coding!!! ***\n")
+		return 0

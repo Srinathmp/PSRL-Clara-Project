@@ -1,13 +1,15 @@
-from Documentation.python_documentation import if_statement
-from Documentation.python_documentation import else_statement
-from Documentation.python_documentation import elif_statement
-from Documentation.python_documentation import python_nested_if_statements
-from Documentation.python_documentation import range_function
-from Documentation.python_documentation import break_and_continue_statements_and_else_clauses_on_loops
-from Documentation.python_documentation import while_loop
-from Documentation.python_documentation import for_loop
-from Documentation.python_documentation import list_doc
-import sys
+# from Documentation.python_documentation import if_statement
+# from Documentation.python_documentation import else_statement
+# from Documentation.python_documentation import elif_statement
+# from Documentation.python_documentation import python_nested_if_statements
+# from Documentation.python_documentation import range_function
+# from Documentation.python_documentation import break_and_continue_statements_and_else_clauses_on_loops
+# from Documentation.python_documentation import while_loop
+# from Documentation.python_documentation import for_loop
+# from Documentation.python_documentation import list_doc
+from Documentation.python_documentation import *
+#import sys
+
 def if_statement_func():
 	print('What would you like to know about if statement ?')
 	print('The subcategories available are :')
@@ -18,7 +20,7 @@ def if_statement_func():
 		j = j+1
 	response =1
 	while(response!=0):
-		print('Enter the number of subcategory in IF that you wish to see ,else press 0 to continue to look at repair')
+		print('Enter the number of subcategory in IF that you wish to see ,else press 0 to end explanation phase')
 		response = int(input())
 		if(response in range(1,len(dict_keys)+1)):
 			print(dict_keys[response-1]," : ",if_statement[dict_keys[response-1]])
@@ -39,7 +41,7 @@ def else_statement_func():
 		j = j+1
 	response =1
 	while(response!=0):
-		print('Enter the number of subcategory in ELSE that you wish to see ,else press 0 to continue to look at repair')
+		print('Enter the number of subcategory in ELSE that you wish to see ,else press 0 to end explanation phase')
 		response = int(input())
 		if(response in range(1,len(dict_keys)+1)):
 			print(dict_keys[response-1]," : ",else_statement[dict_keys[response-1]])
@@ -61,7 +63,7 @@ def elif_statement_func():
 		j = j+1
 	response =1
 	while(response!=0):
-		print('Enter the number of subcategory in ELIF that you wish to see ,else press 0 to continue to look at repair')
+		print('Enter the number of subcategory in ELIF that you wish to see ,else press 0 to end explanation phase')
 		response = int(input())
 		if(response in range(1,len(dict_keys)+1)):
 			print(dict_keys[response-1]," : ",elif_statement[dict_keys[response-1]])
@@ -83,7 +85,7 @@ def python_nested_if_statements_func():
 		j = j+1
 	response =1
 	while(response!=0):
-		print('Enter the number of subcategory in Nested IF that you wish to see ,else press 0 to continue to look at repair')
+		print('Enter the number of subcategory in Nested IF that you wish to see ,else press 0 to end explanation phase')
 		response = int(input())
 		if(response in range(1,len(dict_keys)+1)):
 			print(dict_keys[response-1]," : ",python_nested_if_statements[dict_keys[response-1]])
@@ -92,7 +94,6 @@ def python_nested_if_statements_func():
 		else:
 			print('Invalid response')
 		
-	sys.exit("\nHappy Coding!!!\n")
 
 # python_nested_if_statements_func()
 def range_function_func():
@@ -105,7 +106,7 @@ def range_function_func():
 		j = j+1
 	response =1
 	while(response!=0):
-		print('Enter the number of subcategory you wish to see ,else press 0 to continue to look at repair')
+		print('Enter the number of subcategory in range that you wish to see ,else press 0 to end explanation phase')
 		response = int(input())
 		if(response in range(1,len(dict_keys)+1)):
 			print(dict_keys[response-1]," : ",range_function[dict_keys[response-1]])
@@ -126,7 +127,7 @@ def break_and_continue_statements_and_else_clauses_on_loops_func():
 		j = j+1
 	response =1
 	while(response!=0):
-		print('Enter the number of subcategory you wish to see ,else press 0 to continue to look at repair')
+		print('Enter the number of subcategory you wish to see ,else press 0 to end explanation phase')
 		response = int(input())
 		if(response in range(1,len(dict_keys)+1)):
 			print(dict_keys[response-1]," : ",break_and_continue_statements_and_else_clauses_on_loops[dict_keys[response-1]])
@@ -146,7 +147,7 @@ def while_loop_func():
 		j = j+1
 	response =1
 	while(response!=0):
-		print('Enter the number of subcategory you wish to see ,else press 0 to continue to look at repair')
+		print('Enter the number of subcategory in while loop that you wish to see ,else press 0 to end explanation phase')
 		response = int(input())
 		if(response in range(1,len(dict_keys)+1)):
 			print(dict_keys[response-1]," : ",while_loop[dict_keys[response-1]])
@@ -166,7 +167,7 @@ def for_loop_func():
 		j = j+1
 	response =1
 	while(response!=0):
-		print('Enter the number of subcategory you wish to see ,else press 0 to continue to look at repair')
+		print('Enter the number of subcategory in FOR loop that you wish to see ,else press 0 to end explanation phase')
 		response = int(input())
 		if(response in range(1,len(dict_keys)+1)):
 			print(dict_keys[response-1]," : ",for_loop[dict_keys[response-1]])
@@ -185,7 +186,7 @@ def list_doc_func():
 		j = j+1
 	response =1
 	while(response!=0):
-		print('Enter the number of subcategory you wish to see ,else press 0 to continue to look at repair')
+		print('Enter the number of subcategory in list that you wish to see ,else press 0 to end explanation phase')
 		response = int(input())
 		if(response in range(1,len(dict_keys)+1)):
 			print(dict_keys[response-1]," : ",list_doc[dict_keys[response-1]])
@@ -194,3 +195,22 @@ def list_doc_func():
 		else:
 			print('Invalid response')
 		
+
+def return_func():
+	print('What would you like to know about return statement ?')
+	print('The subcategories available are :')
+	dict_keys = list(return_statement.keys())
+	j = 1
+	for i in dict_keys:
+		print(j,':',i)
+		j = j+1
+	response =1
+	while(response!=0):
+		print('Enter the number of subcategory in return that you wish to see ,else press 0 to end explanation phase')
+		response = int(input())
+		if(response in range(1,len(dict_keys)+1)):
+			print(dict_keys[response-1]," : ",return_statement[dict_keys[response-1]])
+		elif response == 0:
+			return 
+		else:
+			print('Invalid response')

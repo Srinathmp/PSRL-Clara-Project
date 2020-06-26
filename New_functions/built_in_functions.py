@@ -3,7 +3,7 @@
 # And key as the module name
 
 from New_functions.documenting import built_in
-import sys
+#import sys
 import struct
 '''
 for keywords:
@@ -37,4 +37,5 @@ def Interaction_module(clara_feedback,blt, args):
 		print("We are providing you with the repair feedback generated, please analyse it and try reading it from prescribed reference books\n")
 		print(clara_feedback,"\n")
 	elif(reply_4 == 'yes' or reply_4 == 'Yes' or reply_4 == 'YES'):
-		sys.exit("Never Give Up!!!")
+		print("Never Give Up!!!")
+		return 0

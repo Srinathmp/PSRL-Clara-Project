@@ -28,7 +28,9 @@ from clara.model import expr_to_dict, dict_to_expr
 from clara.parser import getlangparser
 from clara.repair import Repair
 #New imports
-from New_functions.feedback_analysis import feedback_channelizer,compute_cost, sort_repair_cost
+from New_functions.feedback_analysis import feedback_channelizer,compute_cost
+from New_functions.speech_to_text_using_wit import RecognizeSpeech
+from New_functions.explanation import recognise_and_explain
 VERBOSE=0
 
 class Clara(object):
@@ -394,14 +396,29 @@ Options are:
 
             feed_no = 0
             # sort the repairs based on cost (in list feedback_list)
-            for f in feedback_list:
-                if self.feedback_channelizer == 1 and self.feedtype != SimpleFeedback:
+            if self.feedback_channelizer == 1 and self.feedtype != SimpleFeedback:
+                for f in feedback_list:
                     feed_no = feed_no +1
-                    feedback_channelizer(f, feed_no, self.models, rep_prog, inter,self.ins, self.args, self.lang)
+                    status = feedback_channelizer(f, feed_no, self.models, rep_prog, inter,self.ins, self.args, self.lang)
+                    if status != None and status == 0:
+                        break
+                
+                print("Would you like to ask some queries with the bot?")
+                print("Press 1 to ask, else press any key to exit")
+                reply = input()
+                if reply == '1':
+                    ask = '1'
+                    while(ask == '1'):
+                        print("\nPlease speak now...\n")
+                        entities =  RecognizeSpeech('myspeech.wav', 6)
+                        ask = recognise_and_explain(entities, self.lang)
                 else:
+                    sys.exit("*** Happy Coding!!! ***\n")
+            else:
+                for f in feedback_list:
                     print('*',f)
 
-                
+
         elif feed.status == Feedback.STATUS_ERROR:
             self.error(feed.error)
 

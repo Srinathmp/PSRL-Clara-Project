@@ -348,3 +348,40 @@ squares = [0,1,4,9,16,25,36,49,64,81]
 
 }
 
+
+return_statement = {
+    'Definition of return':"""A return statement is used to end the execution of the function call and “returns” the result (value of the expression following the return keyword) to the caller. 
+    The statements after the return statements are not executed. If the return statement is without any expression, then the special value None is returned.
+
+    Note: Return statement can not be used outside the function.
+    """,
+    'Syntax':"""
+    def fun():
+    statements
+    .
+    .
+    return [expression]
+    """,
+    'Examples':
+    """
+    # Python program to  
+    # demonstrate return statement  
+      
+    def add(a, b): 
+      
+        # returning sum of a and b 
+        return a + b 
+      
+    def is_true(a): 
+      
+        # returning boolean of a 
+        return bool(a) 
+      
+    # calling function 
+    res = add(2, 3) 
+    print("Result of add function is {}".format(res)) 
+      
+    res = is_true(2<5) 
+    print("\nResult of is_true function is {}".format(res)) 
+    """
+}

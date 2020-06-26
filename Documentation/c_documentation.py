@@ -1,10 +1,10 @@
 if_statement = {
-'definition':	"Conditionally executes code.Used where code needs to be executed only if some condition is true.",
+'definition': "Conditionally executes code.Used where code needs to be executed only if some condition is true.",
 
 'Syntax':
 """
-if ( expression ) statement_true	(1)	
-if ( expression ) statement_true else statement_false	(2)	
+if ( expression ) statement_true  (1) 
+if ( expression ) statement_true else statement_false (2) 
 """,
 'Explanation':
 """
@@ -170,6 +170,252 @@ struct { int a[3], b; } w[] = { { 1 }, 2 }; // array of structs
    // that element is initialized to { {1, 0, 0}, 0}
    // 2 is taken to be the first initialized for element #1 of the array
    // that element is initialized { {2, 0, 0}, 0}
-"""
+""",
+'Related Keywords':"if, else,conditional_statement,ift_explanation,while,break_and_continue,for"
 
+}
+
+for_loop = {
+'definition':"Executes a statement repeatedly, until the value of expression becomes equal to zero. The test takes place before each iteration.",
+'Syntax':"""
+for (initializationStatement; testExpression; updateStatement)
+{
+    // statements inside the body of loop
+}
+""",
+'Explanation':"""
+The initialization statement is executed only once.
+Then, the test expression is evaluated. If the test expression is evaluated to false, the for loop is terminated.
+However, if the test expression is evaluated to true, statements inside the body of for loop are executed, and the update expression is updated.
+Again the test expression is evaluated.If the execution of the loop needs to be terminated at some point, a break statement can be used anywhere within the loop_statement.
+The continue statement used anywhere within the loop_statement transfers control to iteration_expression.As with all other selection and iteration statements, the for statement establishes block scope: any identifier introduced in the init_clause, cond_expression, or iteration_expression goes out of scope after the loop_statement.
+""",
+'Example':
+"""
+// Program to calculate the sum of first n natural numbers
+// Positive integers 1,2,3...n are known as natural numbers
+
+#include <stdio.h>
+int main()
+{
+    int num, count, sum = 0;
+
+    printf("Enter a positive integer: ");
+    scanf("%d", &num);
+
+    // for loop terminates when num is less than count
+    for(count = 1; count <= num; ++count)
+    {
+        sum += count;
+    }
+
+    printf("Sum = %d", sum);
+
+    return 0;
+}
+
+Enter a positive integer: 10
+Sum = 55
+""",
+'Related Keywords':"if, else,conditional_statement,ift_explanation,while,break_and_continue"
+}
+
+while_loop = {
+'definition':"Executes a statement repeatedly, until the value of expression becomes equal to zero. The test takes place before each iteration.",
+'Syntax':"""
+while (testExpression) 
+{
+    // statements inside the body of the loop 
+}""",
+'Explanation':"""The while loop evaluates the test expression inside the parenthesis ().
+If the test expression is true, statements inside the body of while loop are executed. Then, the test expression is evaluated again.
+The process goes on until the test expression is evaluated to false.
+If the test expression is false, the loop terminates (ends).f the execution of the loop needs to be terminated at some point, break statement can be used as a terminating statement.
+If the execution of the loop needs to be continued at the end of the loop body, continue statement can be used as a shortcut.As with all other selection and iteration statements, the while statement establishes block scope: any identifier introduced in the expression goes out of scope after the statement.
+""",
+'Example':
+"""// Print numbers from 1 to 5
+
+#include <stdio.h>
+int main()
+{
+    int i = 1;
+    
+    while (i <= 5)
+    {
+        printf("%d\n", i);
+        ++i;
+    }
+
+    return 0;
+}
+
+1
+2
+3
+4
+5
+""",
+'do_while_explanation':"""
+The do..while loop is similar to the while loop with one important difference. The body of do...while loop is executed at least once. Only then, the test expression is evaluated.
+""",
+'do_while_Syntax':"""
+do
+{
+   // statements inside the body of the loop
+}
+while (testExpression);
+""",
+'do_while_example':
+"""
+// Program to add numbers until the user enters zero
+
+#include <stdio.h>
+int main()
+{
+    double number, sum = 0;
+
+    // the body of the loop is executed at least once
+    do
+    {
+        printf("Enter a number: ");
+        scanf("%lf", &number);
+        sum += number;
+    }
+    while(number != 0.0);
+
+    printf("Sum = %.2lf",sum);
+
+    return 0;
+}
+""",
+'Related Keywords':"if, else,conditional_statement,ift_explanation,for,break_and_continue"
+}
+
+break_and_continue = {
+'definition of break':"""
+Causes the enclosing for, while or do-while loop or switch statement to terminate.
+Used when it is otherwise awkward to terminate the loop using the condition expression and conditional statements.
+Appears only within the statement of a loop body (while, do, for) or within the statement of a switch.After this statement the control is transferred to the statement or declaration immediately following the enclosing loop or switch.
+""",
+'Syntax for break':"break;",
+'Example for break':
+"""
+// Program to calculate the sum of a maximum of 10 numbers
+// If a negative number is entered, the loop terminates
+
+# include <stdio.h>
+int main()
+{
+    int i;
+    double number, sum = 0.0;
+
+    for(i=1; i <= 10; ++i)
+    {
+        printf("Enter a n%d: ",i);
+        scanf("%lf",&number);
+
+        // If the user enters a negative number, the loop ends
+        if(number < 0.0)
+        {
+            break;
+        }
+
+        sum += number; // sum = sum + number;
+    }
+
+    printf("Sum = %.2lf",sum);
+    
+    return 0;
+}
+
+
+Enter a n1: 2.4
+Enter a n2: 4.5
+Enter a n3: 3.4
+Enter a n4: -3
+Sum = 10.30
+""",
+'definition of continue':"""The continue statement skips the current iteration of the loop and continues with the next iteration.Causes the remaining portion of the enclosing for, while or do-while loop body to be skipped.
+Used when it is otherwise awkward to ignore the remaining portion of the loop using conditional statements.
+""",
+'Syntax of continue':"continue;",
+'Example for continue':"""
+// Program to calculate the sum of a maximum of 10 numbers
+// Negative numbers are skipped from the calculation
+
+# include <stdio.h>
+int main()
+{
+    int i;
+    double number, sum = 0.0;
+
+    for(i=1; i <= 10; ++i)
+    {
+        printf("Enter a n%d: ",i);
+        scanf("%lf",&number);
+
+        if(number < 0.0)
+        {
+            continue;
+        }
+
+        sum += number; // sum = sum + number;
+    }
+
+    printf("Sum = %.2lf",sum);
+    
+    return 0;
+}
+
+Enter a n1: 1.1
+Enter a n2: 2.2
+Enter a n3: 5.5
+Enter a n4: 4.4
+Enter a n5: -3.4
+Enter a n6: -45.5
+Enter a n7: 34.5
+Enter a n8: -4.2
+Enter a n9: -1000
+Enter a n10: 12
+Sum = 59.70
+""",
+'Related Keywords':"if, else,conditional_statement,ift_explanation,for,while"
+}
+
+return_statement = {
+'definition of return':"""A return statement ends the execution of a function, and returns control to the calling function. 
+Execution resumes in the calling function at the point immediately following the call. 
+A return statement can return a value to the calling function.
+""",
+'Syntax for return':"""return expression(optional, based on the return type specified in function prototype);""",
+'Examples for return':"""
+  Eg: 1)
+    double ratio( int numerator, int denominator )
+  {
+    // Cast one operand to double to force floating-point
+    // division. Otherwise, integer division is used,
+    // then the result is converted to the return type.
+    return numerator / (double) denominator;
+  }
+
+  Eg: 2)
+  void report_square( void )
+  {
+    int value = INT_MAX;
+    long long squared = 0LL;
+    squared = square( value );
+    printf( "value = %d, squared = %lld\n", value, squared );
+    return; // Use an empty expression to return void.
+  }
+
+  Eg: 3)
+  void report_ratio( int top, int bottom )
+  {
+    double fraction = ratio( top, bottom );
+    printf( "%d / %d = %.16f\n", top, bottom, fraction );
+    // It's okay to have no return statement for functions
+    // that have void return types.
+  }
+  """
 }

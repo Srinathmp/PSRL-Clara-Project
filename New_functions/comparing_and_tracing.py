@@ -1,6 +1,6 @@
 from clara.interpreter import getlanginter
 from New_functions.documenting import return_explanation
-import sys
+#import sys
 import string
 import re
 
