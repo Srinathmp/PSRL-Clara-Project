@@ -6,7 +6,7 @@ from New_functions.documenting import conditional_statement, ift_explanation, bo
 from Documentation.doc_testing import if_statement_func, else_statement_func
 from Documentation.python_doc_testing import if_statement_func, else_statement_func, elif_statement_func, python_nested_if_statements_func
 
-def ift_feedback(clara_feedback, ins,args, lang):
+def ift_feedback(clara_feedback,cleaned_feedback, ins,args, lang):
 	print("1 : Brief explanation\n")
 	print("2 : Detailed complete explanation\n")
 	print("3 : To look at repair directly\n")
@@ -59,14 +59,14 @@ def ift_feedback(clara_feedback, ins,args, lang):
 				print("Exception arosed is :", err)
 
 	if reply == '3':
-		print(clara_feedback,"\n")
+		print(cleaned_feedback,"\n")
 		print("****************************************************\n")
 		return 
 
 	print("Press 1 to look at repair generated, else 0 to exit\n")
 	reply = int(input())
 	if reply == 1:
-		print(clara_feedback,"\n")
+		print(cleaned_feedback,"\n")
 		print("****************************************************\n")
 	elif reply == 0:
 		print("*** Happy Coding!!! ***\n")

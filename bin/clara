@@ -31,6 +31,7 @@ from clara.repair import Repair
 from New_functions.feedback_analysis import feedback_channelizer,compute_cost
 from New_functions.speech_to_text_using_wit import RecognizeSpeech
 from New_functions.explanation import recognise_and_explain
+
 VERBOSE=0
 
 class Clara(object):
@@ -286,8 +287,7 @@ Options are:
                     else:
                         inner_tr_dict[new_key].append(trace[i][2][temp_keylist[k]])
                 # final_dict[(trace[i][0],trace[i][1])]=trace[i][2]
-                final_dict[(trace[i][0],trace[i][1])]=inner_tr_dict
-        #print(final_dict)      
+                final_dict[(trace[i][0],trace[i][1])]=inner_tr_dict      
         #print('final_dict=',final_dict[list(final_dict.keys())[0]]) # has the structured trace without the impl of colon issue..!
         self.variable_trace(final_dict)
 #-------------------------------------------------------------------
@@ -381,6 +381,7 @@ Options are:
         if type(feed) == tuple:
             rep_prog = feed[0]
             feed = feed[1]
+
         #Added to trace using interpreter
         inter = self.inter(entryfnc=self.entryfnc)
 
@@ -403,7 +404,7 @@ Options are:
                     status = feedback_channelizer(f, feed_no, self.models, rep_prog, inter,self.ins, self.args, self.lang)
                     if status != None and status == 0:
                         break
-                
+                print("\n*****************************************************************\n")
                 print("Would you like to ask some queries with the bot?")
                 print("Press 1 to ask, else press any key to exit")
                 reply = input()
@@ -415,6 +416,8 @@ Options are:
                         ask = recognise_and_explain(entities, self.lang)
                 else:
                     sys.exit("*** Happy Coding!!! ***\n")
+
+                print("\n*****************************************************************\n")
             else:
                 for f in feedback_list:
                     print('*',f)

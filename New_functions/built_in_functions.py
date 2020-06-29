@@ -17,8 +17,8 @@ print(blt_ins['range'])
 '''
 
 #Python 2 version
-def Interaction_module(clara_feedback,blt, args):
-	print(blt +":- This is the function where you have gone wrong")
+def Interaction_module(clara_feedback,cleaned_feedback, blt, args):
+	print(blt +":- This is the builtin function where you have gone wrong")
 	print("Probably you might have passed incorrect values as parameter")
 	print("Would you prefer having a quick glance at the explanation about the " + blt+"?")
 	print("yes/no\n")
@@ -35,7 +35,7 @@ def Interaction_module(clara_feedback,blt, args):
 	reply_4 = input()
 	if(reply_4 == 'no' or reply_4 =='No' or reply_4 == 'NO'):
 		print("We are providing you with the repair feedback generated, please analyse it and try reading it from prescribed reference books\n")
-		print(clara_feedback,"\n")
+		print(cleaned_feedback,"\n")
 	elif(reply_4 == 'yes' or reply_4 == 'Yes' or reply_4 == 'YES'):
 		print("Never Give Up!!!")
 		return 0

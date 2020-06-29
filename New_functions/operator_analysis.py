@@ -4,7 +4,7 @@
 from New_functions.documenting import arithmetic_op, relational_op
 #import sys
 
-def feedback_comp_operator(segments, operator,clara_feedback,ins, args):
+def feedback_comp_operator(segments, operator,clara_feedback,cleaned_feedback,ins, args):
 	op = operator.split(' (')[1].split(')')[0]
 	if op in segments[0]:
 		print("Looks like you have used an incorrect relational operator")
@@ -25,12 +25,12 @@ def feedback_comp_operator(segments, operator,clara_feedback,ins, args):
 	reply = int(input())
 	if (reply == 1):
 		print("\nThe feedback generated is : ")
-		print(clara_feedback, "\n")
+		print(cleaned_feedback, "\n")
 	else:
 		print("*** Happy Coding!!! ***\n")
 		return 0
 
-def feedback_arth_operator(segments,operator,clara_feedback,ins, args): #depending on whether args passed or ins passed use accordingly
+def feedback_arth_operator(segments,operator,clara_feedback,cleaned_feedback, ins, args): #depending on whether args passed or ins passed use accordingly
 	op = operator.split(' (')[1].split(')')[0]																		#accordingly one of them will be None
 	if op in segments[0]:
 		print("Looks like you have used an incorrect arithmetic operator")
@@ -49,13 +49,13 @@ def feedback_arth_operator(segments,operator,clara_feedback,ins, args): #dependi
 	reply = int(input())
 	if (reply == 1):
 		print("\nThe feedback generated is : ")
-		print(clara_feedback,"\n")
+		print(cleaned_feedback,"\n")
 		print("****************************************************\n")
 	else:
 		print("*** Happy Coding!!! ***\n")
 		return 0
 
-def feedback_logic_operator(segments, operator, clara_feedback,ins, args):
+def feedback_logic_operator(segments, operator, clara_feedback,cleaned_feedback,ins, args):
 	if operator in segments[0]:
 		print("Looks like you have used an incorrect logical operator")
 		print("The incorrect operator used in program is :", operator)
@@ -66,13 +66,13 @@ def feedback_logic_operator(segments, operator, clara_feedback,ins, args):
 	reply = int(input())
 	if (reply == 1):
 		print("\nThe feedback generated is : ")
-		print(clara_feedback,"\n")
+		print(cleaned_feedback,"\n")
 		print("****************************************************\n")
 	else:
 		print("*** Happy Coding!!! ***\n")
 		return 0
 
-def feedback_incorrect_value(n1, n2, clara_feedback,ins, args):
+def feedback_incorrect_value(n1, n2, clara_feedback,cleaned_feedback,ins, args):
 	print("Looks like you have used incorrect constant value")
 	print("Literal :",n1,",might have been assigned to a variable or used as one of the operand")
 	print("This might be one of the reason for incorrect output")
@@ -82,7 +82,7 @@ def feedback_incorrect_value(n1, n2, clara_feedback,ins, args):
 	reply = int(input())
 	if (reply == 1):
 		print("\nThe feedback generated is : ")
-		print(clara_feedback,"\n")
+		print(cleaned_feedback,"\n")
 		print("****************************************************\n")
 	else:
 		print("*** Happy Coding!!! ***\n")

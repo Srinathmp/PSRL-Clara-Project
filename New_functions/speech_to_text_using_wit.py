@@ -1,3 +1,4 @@
+import sys
 import requests
 import json
 from New_functions.Recorder import record_audio, read_audio
@@ -68,6 +69,9 @@ def RecognizeSpeech(AUDIO_FILENAME, num_seconds):
         text = stuff
         sample_text = text_clean(text)
         # print('original text = ',text)
+        if sample_text == "":
+            sys.exit("You didn't give any query")
+
         final_request = curl_request+sample_text+"'"
         # print('curl_request = ',final_request)
         sub_list = shlex.split(final_request)
