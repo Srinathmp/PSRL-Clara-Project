@@ -266,8 +266,109 @@ def remove_substr(temp_text,substr):
 	# # print(text)
 	# return text
 	
+# def ite_check(text):
+# 	sub_ite = findall_occurence(text,'ite')
+# 	sub_ite = [i+3 for i in sub_ite]
+# 	# print(sub_ite)
+# 	temp=""
+# 	templist=[]
+# 	p_match=0
+# 	for i in sub_ite:
+# 		while i<len(text):
+# 			temp+=text[i]
+# 			if text[i]=='(':
+# 				p_match+=1
+# 			elif text[i]==')':
+# 				p_match-=1
+# 			if p_match==0:
+# 				# print(temp)
+# 				templist.append(temp)
+# 				temp=""
+# 				break
+# 			i+=1
+	
+	
+# 	for i in range(len(templist)):  # for removing ite() outer brackets
+# 		templist[i]=templist[i][1:]
+# 		templist[i]=templist[i][:len(templist[i])-1]
+# 		templist[i]=templist[i].strip()
+
+# 	# print(templist)
+# 	feed_txt=""
+# 	itelist=[]
+# 	for i in range(len(templist)):
+# 		p_match=0
+# 		temp=""
+# 		itelist.append([])
+# 		for j in range(len(templist[i])):
+# 			if templist[i][j]=='(':
+# 				p_match+=1
+# 			elif templist[i][j]==')':
+# 				p_match-=1
+# 			if templist[i][j]!=' ':
+# 				temp+=templist[i][j]
+# 			if p_match==0 and templist[i][j]==')':
+# 				itelist[i].append(temp)
+# 				temp=""
+# 	# print(itelist)
+# 	if itelist[0][0] != itelist[1][0]:
+# 		# print('Problem in condition of if-then-else statement')
+# 		# print('Change',itelist[0][0],'to',itelist[1][0])
+# 		# print()
+# 		feed_txt += 'Problem in condition of if-then-else statement\n'+'Change '+itelist[0][0]+' to '+itelist[1][0]+'\n'
+# 	if itelist[0][1] != itelist[1][1]:
+# 		# print('Problem in body of if-then-else statement')
+# 		pcount=0
+# 		temp=""
+# 		bodylist=[[],[]]
+# 		j=0
+# 		for i in range(len(templist[0])): #incorrect part
+# 			if templist[0][i]=='(':
+# 				pcount+=1
+# 			elif templist[0][i]==')':
+# 				pcount-=1
+# 			if pcount == 0 and templist[0][i]==',':
+# 				bodylist[0].append(temp)
+# 				temp=""
+# 				j=i
+# 			else:
+# 				temp+=templist[0][i]
+# 		bodylist[0].append(templist[0][j+1:])
+# 		j=0
+# 		temp=""
+# 		for i in range(len(templist[1])): #correct part
+# 			if templist[1][i]=='(':
+# 				pcount+=1
+# 			elif templist[1][i]==')':
+# 				pcount-=1
+# 			if pcount == 0 and templist[1][i]==',':
+# 				bodylist[1].append(temp)
+# 				temp=""
+# 				j=i
+# 			else:
+# 				temp+=templist[1][i]
+# 		bodylist[1].append(templist[1][j+1:])
+# 		# print(bodylist)
+# 		if bodylist[0][1]!=bodylist[1][1]:
+# 			# print('Problem in true block of ite')
+# 			# print('Change',bodylist[0][1],'to',bodylist[1][1])
+# 			# print()
+# 			feed_txt+='Problem in true block of ite\n'+'Change '+bodylist[0][1]+' to '+bodylist[1][1]+'\n'
+# 		if bodylist[0][2]!=bodylist[1][2]:
+# 			# print('Problem in false block of ite')
+# 			# print('Change',bodylist[0][2],'to',bodylist[1][2])
+# 			# print()
+# 			feed_txt+='Problem in true block of ite\n'+'Change '+bodylist[0][2]+' to '+bodylist[1][2]+'\n'
+
+# 	if itelist[0][0] == itelist[1][0] and itelist[0][1] == itelist[1][1]:
+# 		# print('unnecessary feedback')
+# 		feed_txt='unnecessary feedback'
+# 	return feed_txt
+
 def ite_check(text):
 	sub_ite = findall_occurence(text,'ite')
+	if len(sub_ite)<=1:
+		return text
 	sub_ite = [i+3 for i in sub_ite]
 	# print(sub_ite)
 	temp=""

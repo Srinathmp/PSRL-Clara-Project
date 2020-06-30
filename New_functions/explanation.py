@@ -6,7 +6,7 @@ engine = pyttsx3.init()
 
 #Customizing properties
 engine.setProperty('voice', 'english+f4')
-engine.setProperty('rate', 160)
+engine.setProperty('rate', 170)
 
 def recognise_and_explain(entities, lang):
 	if lang == 'c':

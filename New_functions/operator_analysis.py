@@ -22,8 +22,8 @@ def feedback_comp_operator(segments, operator,clara_feedback,cleaned_feedback,in
 		print("There is a requirement for a comparison be performed between operands, for expression to be evaluated as True or False.")
 		print("The relational operator required is :", operator)
 	print("\nPress 1 to look at the repair generated, else press 0 to exit")
-	reply = int(input())
-	if (reply == 1):
+	reply = input()
+	if (reply == '1'):
 		print("\nThe feedback generated is : ")
 		print(cleaned_feedback, "\n")
 	else:
@@ -46,8 +46,8 @@ def feedback_arth_operator(segments,operator,clara_feedback,cleaned_feedback, in
 		print("There is a requirement for an",operator,"operation to be performed")
 	#provide better explanation for reason behind this
 	print("\nPress 1 to look at the repair generated, else press 0 to exit")
-	reply = int(input())
-	if (reply == 1):
+	reply = input()
+	if (reply == '1'):
 		print("\nThe feedback generated is : ")
 		print(cleaned_feedback,"\n")
 		print("****************************************************\n")
@@ -63,8 +63,8 @@ def feedback_logic_operator(segments, operator, clara_feedback,cleaned_feedback,
 		print("A logical operation is to be performed by the operator :",operator)
 	#provide better explanation for reason behind this
 	print("\nPress 1 to look at the repair generated, else press 0 to exit")
-	reply = int(input())
-	if (reply == 1):
+	reply = input()
+	if (reply == '1'):
 		print("\nThe feedback generated is : ")
 		print(cleaned_feedback,"\n")
 		print("****************************************************\n")
@@ -79,8 +79,8 @@ def feedback_incorrect_value(n1, n2, clara_feedback,cleaned_feedback,ins, args):
 	print("It is suggested that you analyze the expression")
 	#provide better explanation for reason behind this
 	print("\nPress 1 to look at the repair generated, else press 0 to exit")
-	reply = int(input())
-	if (reply == 1):
+	reply = input()
+	if (reply == '1'):
 		print("\nThe feedback generated is : ")
 		print(cleaned_feedback,"\n")
 		print("****************************************************\n")

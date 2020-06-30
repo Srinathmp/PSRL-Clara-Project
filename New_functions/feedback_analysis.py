@@ -77,9 +77,7 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 		elif arguements != None:
 			trace_incorrect_prog = inter.run(programs[-1], None,  arguements[0], inputs)
 
-		print("In function\n")
 		cleaned_feedback = feed_main(clara_feedback, trace_incorrect_prog)
-		print("_----------\n")
 		#print(cleaned_feedback)
 	except Exception as err:
 		print('Exception arose is(cl) :', err)
@@ -209,7 +207,7 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 			if ('return' in clara_feedback) or ('$ret' in clara_feedback):
 				incorrect_return(clara_feedback,cleaned_feedback,programs, rep_prog, inter, arguements, inputs)
 				if ' if ' in segments[0] or ' if ' in segments[1]:
-					print("Since there was 'if' statements involved, press 1 to read about it")
+					print("Since there was 'if' statements involved, press 1 to read about it, else any key to continue")
 					ans = input()
 					if ans == '1':
 						status = ift_feedback(clara_feedback, cleaned_feedback, inputs, arguements, lang)
@@ -262,13 +260,13 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 						print("***************************************************\n")
 					return 
 
-			print("No further explanation specific to error number :=",feed_no,"could be generated")
+			print("No further explanation specific to error number :=",feed_no,",could be generated")
 			print("Press 1 to just look at repairs directly, else press 0 to exit")
-			reply = int(input())
-			if reply == 1:
+			reply = input()
+			if reply == '1':
 				print(cleaned_feedback,"\n")
 				print("****************************************************\n")
-			elif reply == 0:
+			else:
 				print("*** Happy Coding!!! ***\n")
 				return 0
 			#FOR most of feedbacks can compare between incorrect and correction expression given in feedback 

@@ -4,6 +4,9 @@ import pyttsx3
 # initialisation 
 engine = pyttsx3.init() 
 
+# engine.setProperty('voice', 'english+f4')
+# engine.setProperty('rate', 160)
+
 def boolean():
 	"""An expression which evaluates to either true or false is called a boolean expression.
 Boolean expressions are used extensively in programming language constructs such as if-then-else commands and while loops.\n"""

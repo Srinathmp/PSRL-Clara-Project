@@ -17,9 +17,9 @@ def ift_feedback(clara_feedback,cleaned_feedback, ins,args, lang):
 		print("\n------------------------------------------------------------------------------------\n")
 		print(ift_explanation.__doc__)
 		ift_explanation()
-		print("To know what is conditional statement, press 1, else press any number to continue\n")
-		reply_1 = int(input())
-		if reply_1 == 1:
+		print("To know what is conditional statement, press 1, else press any key to continue\n")
+		reply_1 = input()
+		if reply_1 == '1':
 			print(conditional_statement.__doc__)
 			conditional_statement()
 		print("\n------------------------------------------------------------------------------------\n")
@@ -39,16 +39,16 @@ def ift_feedback(clara_feedback,cleaned_feedback, ins,args, lang):
 			print("4 : Nested IF statements")
 			print("Choose one of the options from above, to continue reading about it, else press 0 to quit reading :")
 			try:		
-				choice = int(input())
+				choice = input()
 				while(choice):
 					print("\n---------------------------------------------------------------------------------------------------\n")
-					if choice == 1:
+					if choice == '1':
 						if_statement_func()
-					elif choice == 2:
+					elif choice == '2':
 						else_statement_func()
-					elif choice == 3:
+					elif choice == '3':
 						elif_statement_func()
-					elif choice == 4:
+					elif choice == '4':
 						python_nested_if_statements_func()
 					else:
 						print('Invalid choice, choose one from above options')
@@ -64,22 +64,22 @@ def ift_feedback(clara_feedback,cleaned_feedback, ins,args, lang):
 		return 
 
 	print("Press 1 to look at repair generated, else 0 to exit\n")
-	reply = int(input())
-	if reply == 1:
+	reply = input()
+	if reply == '1':
 		print(cleaned_feedback,"\n")
 		print("****************************************************\n")
-	elif reply == 0:
+	else:
 		print("*** Happy Coding!!! ***\n")
 		return 0
 
 def incorrect_conditional_exp(clara_feedback, ins, args):
 	print("\nLooks like you have used incorrect conditional expression.\n")
 	print("**To know what is conditional expression in brief press 1, else press 0 to exit**\n")
-	reply = int(input())
-	if reply == 0:
+	reply = input()
+	if reply == '0':
 		print("*** Happy Coding!!! ***\n")
-		return reply
-	elif reply == 1:
+		return 0
+	elif reply == '1':
 		print("----------------------------------------------------------------------\n")
 		print(conditional_statement.__doc__)
 		conditional_statement()
