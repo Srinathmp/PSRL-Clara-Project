@@ -40,7 +40,7 @@ def ift_feedback(clara_feedback,cleaned_feedback, ins,args, lang):
 			print("Choose one of the options from above, to continue reading about it, else press 0 to quit reading :")
 			try:		
 				choice = input()
-				while(choice):
+				while(choice != '0'):
 					print("\n---------------------------------------------------------------------------------------------------\n")
 					if choice == '1':
 						if_statement_func()
@@ -53,7 +53,7 @@ def ift_feedback(clara_feedback,cleaned_feedback, ins,args, lang):
 					else:
 						print('Invalid choice, choose one from above options')
 					print("Select choice to further continue reading, else 0 to quit\n")
-					choice = int(input())
+					choice = input()
 					print("\n---------------------------------------------------------------------------------------------------\n")
 			except exception as err:
 				print("Exception arosed is :", err)

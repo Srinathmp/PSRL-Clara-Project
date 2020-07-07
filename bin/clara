@@ -392,18 +392,20 @@ Options are:
             feedback_list = []
             for f in feed.feedback:
                 feedback_list.append(f)
+            status_cost = 1
             if self.feedback_channelizer == 1 and self.feedtype != SimpleFeedback:
-                compute_cost(feedback_list,self.models,rep_prog,inter,self.args,self.ins)
+                status_cost = compute_cost(feedback_list,self.models,rep_prog,inter,self.args,self.ins)
                 #feedback_list = sort_repair_cost(feedback_list)
 
             feed_no = 0
             # sort the repairs based on cost (in list feedback_list)
             if self.feedback_channelizer == 1 and self.feedtype != SimpleFeedback:
-                for f in feedback_list:
-                    feed_no = feed_no +1
-                    status = feedback_channelizer(f, feed_no, self.models, rep_prog, inter,self.ins, self.args, self.lang)
-                    if status != None and status == 0:
-                        break
+                if status_cost != 0:
+                    for f in feedback_list:
+                        feed_no = feed_no +1
+                        status = feedback_channelizer(f, feed_no, self.models, rep_prog, inter,self.ins, self.args, self.lang)
+                        if status != None and status == 0:
+                            break
                 print("\n*****************************************************************\n")
                 print("Would you like to ask some queries with the bot?")
                 print("Press 1 to ask, else press any key to exit")
@@ -418,7 +420,7 @@ Options are:
                     sys.exit("*** Happy Coding!!! ***\n")
 
                 print("\n*****************************************************************\n")
-            else:
+            elif status_cost != 0:
                 for f in feedback_list:
                     print('*',f)
 

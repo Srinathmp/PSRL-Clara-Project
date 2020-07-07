@@ -68,6 +68,7 @@ def compute_cost(feedback_list, programs,rep_prog, inter,args, ins):
 		if reply == '0':
 			print("*** Happy Coding!!! ***\n")
 			return 0
+	return 1
 
 # Function to analysis the type of feedback 
 def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inputs, arguements, lang):
@@ -93,7 +94,7 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 			print("Encountered error number :", feed_no)
 			print("----------------------------------------------------------------\n")
 			location = display_location(clara_feedback)
-			if location != None:	
+			if location != None and ' None' not in location:	
 				print("** The location in your program where the bug detected is :")
 				print(location, "**\n")
 				print("--------------------------------------------------------------------------\n")
@@ -214,8 +215,8 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 						if status == 0:
 							return 0
 				print("Press 1 to continue with possible any further related repairs, else press 0 to exit")
-				reply = int(input())
-				if reply == 0:
+				reply = input()
+				if reply == '0':
 					print("*** Happy Coding!!! ***\n")
 					return 0
 
@@ -254,11 +255,11 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 					print("There might be an incorrect initialization.")
 					print("It is recommended that you dry run through code look for right initialization")
 					print("Repair to this has been generated, press 1 to see repair or 0 to exit")
-					reply2 = int(input())
-					if(reply2 == 1):
+					reply2 = input()
+					if(reply2 == '1'):
 						print(cleaned_feedback, "\n")
 						print("***************************************************\n")
-					return 
+					return 0
 
 			print("No further explanation specific to error number :=",feed_no,",could be generated")
 			print("Press 1 to just look at repairs directly, else press 0 to exit")
