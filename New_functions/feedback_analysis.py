@@ -7,6 +7,10 @@ from New_functions.operator_analysis import feedback_incorrect_value
 from New_functions.comparing_and_tracing import compare_outputs, incorrect_return, display_location
 from New_functions.simp_feed import feed_main 
 from Documentation.python_doc_testing import for_loop_func
+##Voice based interaction imports
+from New_functions.bot_conversation import RecognizeSpeech_during_interaction
+from gtts import gTTS
+import os
 ### GIVE THE MOST influential repair first and then next.
 '''
 def get_key(index_dict, val):
@@ -95,6 +99,12 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 			print("----------------------------------------------------------------\n")
 			location = display_location(clara_feedback)
 			if location != None and ' None' not in location:	
+				speak = "The location in your program where the bug is."
+				speak += location 
+				speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+				speech_obj.save('wit_bot.mp3')
+				os.system("mpg321 wit_bot.mp3")
+				print("\n----------------------------------------------------------------\n")
 				print("** The location in your program where the bug detected is :")
 				print(location, "**\n")
 				print("--------------------------------------------------------------------------\n")
@@ -102,19 +112,44 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 			#When an expression is to be deleted from incorrect program
 			if "Add" in clara_feedback or "Delete " in clara_feedback:
 				considered = 1
+				print("\n--------------------------------------------------------------------------\n")
 				print("Clara is suggesting either to remove or add an expression in your code, this would mean that cost of repair is more")
 				print("It is recommended that you consider debugging on your own first")
-				print("If not then press 1 to look at repair generated or press 0 to exit")
-				reply = input()
-				if reply == '1':
-					print(cleaned_feedback,"\n")
-					print("****************************************************\n")
-					return 
-				elif reply == '0':
-					print("*** Happy Coding!!! ***\n")
-					return 0
-				else:
-					return 
+				print("\n--------------------------------------------------------------------------\n")
+				speak = "You can look at clara generated repair or prefer to quit, if you wish on debug on own"
+				speak += "Please speak out your preference now"
+				speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+				speech_obj.save('wit_bot.mp3')
+				os.system("mpg321 wit_bot.mp3")
+				talk = 1
+				spoke = 0
+				# Giving user 3 chances to speak out incase it wasn't recorded properly
+				while(talk != 3):
+					if(spoke):
+						speak = "Please give your response now."
+						speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+						speech_obj.save('wit_bot.mp3')
+						os.system("mpg321 wit_bot.mp3")
+
+					spoke = 1
+					print("\n***Please speak now...\n")
+					reply =  RecognizeSpeech_during_interaction('myspeech.wav', 6)
+					if reply:
+						if (reply[0] == 'Agree' or reply[1] == 'on') and (reply[0] != 'Disagree'):
+							print(cleaned_feedback,"\n")
+							print("****************************************************\n")
+							return 
+						else:
+							print("*** Happy Coding!!! ***\n")
+							return 0
+					else:
+						speak = "Sorry...couldn't record your voice, please try again."
+						speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+						speech_obj.save('wit_bot.mp3')
+						os.system("mpg321 wit_bot.mp3")
+						#Increment to consider the chances taken up
+						talk += 1
+						return 
 
 			# Getting the line number 
 			#### Will remove line number as not needed

@@ -2,7 +2,7 @@ import sys
 import requests
 import json
 from New_functions.Recorder import record_audio, read_audio
-from New_functions.explanation import recognise_and_explain
+# from New_functions.explanation import recognise_and_explain
 import shlex 
 import subprocess
 import readline
@@ -63,7 +63,7 @@ def RecognizeSpeech(AUDIO_FILENAME, num_seconds):
     if(received_audio_input==1):
         #processing the returned text
         default_value = text
-        print("\n Note : You can edit the query below inplace, if it didn't match what you asked\n")
+        print("\n***Note : You can edit the query below inplace, if this is not what you said, else press enter key to proceed***\n")
         print('Did you say?')
         stuff = rlinput("", default_value)
         text = stuff

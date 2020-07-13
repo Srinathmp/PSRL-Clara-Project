@@ -384,7 +384,7 @@ Sum = 59.70
 }
 
 return_statement = {
-'definition of return':"""A return statement ends the execution of a function, and returns control to the calling function. 
+'definition':"""A return statement ends the execution of a function, and returns control to the calling function. 
 Execution resumes in the calling function at the point immediately following the call. 
 A return statement can return a value to the calling function.
 """,

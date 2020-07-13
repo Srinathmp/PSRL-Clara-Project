@@ -15,6 +15,10 @@ import traceback
 
 from ast import literal_eval
 
+### Using google text to speech
+from gtts import gTTS
+import os
+
 # clara imports
 from clara.common import parseargs, debug
 from clara.feedback import Feedback, FeedGen
@@ -31,6 +35,7 @@ from clara.repair import Repair
 from New_functions.feedback_analysis import feedback_channelizer,compute_cost
 from New_functions.speech_to_text_using_wit import RecognizeSpeech
 from New_functions.explanation import recognise_and_explain
+from New_functions.bot_conversation import RecognizeSpeech_during_interaction
 
 VERBOSE=0
 
@@ -407,19 +412,61 @@ Options are:
                         if status != None and status == 0:
                             break
                 print("\n*****************************************************************\n")
-                print("Would you like to ask some queries with the bot?")
-                print("Press 1 to ask, else press any key to exit")
-                reply = input()
-                if reply == '1':
-                    ask = '1'
-                    while(ask == '1'):
-                        print("\nPlease speak now...\n")
-                        entities =  RecognizeSpeech('myspeech.wav', 6)
-                        ask = recognise_and_explain(entities, self.lang)
-                else:
-                    sys.exit("*** Happy Coding!!! ***\n")
+                print("Would you like to ask some programming queries with the bot?")
+                # print("Press 1 to ask, else press any key to exit")
+                speak = "Welcome !....to the bot interaction mode. Do you have some queries?"
+                speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+                speech_obj.save('wit_bot.mp3')
+                os.system("mpg321 wit_bot.mp3")
+                # reply = input()
+                # if reply == '1':
+                talk = 1
+                spoke = 0 #To store whether user spoke has gone through while loop once but voice didn't record
+                #Continue till user wishes to interact
+                while(talk != 4):
+                    if(spoke):
+                        speak = "Please give your response now."
+                        speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+                        speech_obj.save('wit_bot.mp3')
+                        os.system("mpg321 wit_bot.mp3")
 
-                print("\n*****************************************************************\n")
+                    spoke = 1
+                    ask = 1
+                    print("\n***Please speak now...\n")
+                    reply =  RecognizeSpeech_during_interaction('myspeech.wav', 6)
+                    if reply:
+                        if (reply[0] == 'Agree' or reply[1] == 'on') and (reply[0] != 'Disagree'):
+                            while(ask != 4):
+                                print("\nPlease speak now...\n")
+                                speak = "Tell me where you have got doubt. I will try to clear them."
+                                speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+                                speech_obj.save('wit_bot.mp3')
+                                os.system("mpg321 wit_bot.mp3")
+
+                                entities =  RecognizeSpeech('myspeech.wav', 6)
+                                ask = recognise_and_explain(entities, self.lang, ask)
+
+                        # While exiting when user responds with disagreement or user doesn't want to ask
+                        # When ask == '0'
+                        speak = "Have a Good day. Happy learning and coding!"
+                        speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+                        speech_obj.save('wit_bot.mp3')
+                        os.system("mpg321 wit_bot.mp3")
+                        sys.exit("*** Happy Coding!!! ***\n")
+
+                    else:
+                        if(talk<3):
+                            speak = "Sorry...couldn't record your voice, or response not relevant.Please try again."
+                            speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+                            speech_obj.save('wit_bot.mp3')
+                            os.system("mpg321 wit_bot.mp3")
+                        else:
+                            speak = "Sorry...couldn't record your voice, or response not relevant."
+                            speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+                            speech_obj.save('wit_bot.mp3')
+                            os.system("mpg321 wit_bot.mp3")
+                        talk += 1
+                    print("\n*****************************************************************\n")
             elif status_cost != 0:
                 for f in feedback_list:
                     print('*',f)

@@ -162,7 +162,7 @@ def incorrect_return(clara_feedback, programs,rep_prog, inter, args, ins):
 def display_location(clara_feedback):
 	diff_locs = [' the condition of the if-statement ',' inside the if-branch starting ',' after the if-statement beginning ',
 				' inside the else-branch starting ',' the condition of ', ' *after* the ',
-				' update of the ',' inside the body of the ', ' at ', ' at line ']
+				' update of the ',' inside the body of the ', ' at ', ' at line ', ' around the beginning of ']
 
 	place = 0
 	for loc in diff_locs:

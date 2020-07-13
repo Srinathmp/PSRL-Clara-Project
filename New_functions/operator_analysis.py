@@ -26,6 +26,11 @@ def feedback_comp_operator(segments, operator,clara_feedback,cleaned_feedback,in
 	if (reply == '1'):
 		print("\nThe feedback generated is : ")
 		print(cleaned_feedback, "\n")
+		print("----------------------------------------------------")
+		print("Rating repair on a scale of 5; 1-not critical repair and 5-very critical repair\n")
+		print("\n(4)* * * *, Critical repair as incorrect comparison operator alters the flow of logic\n")
+		print("----------------------------------------------------\n")
+
 	else:
 		print("*** Happy Coding!!! ***\n")
 		return 0
