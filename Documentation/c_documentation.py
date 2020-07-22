@@ -419,3 +419,37 @@ A return statement can return a value to the calling function.
   }
   """
 }
+
+operator_entity = {
+  'definition' : """An operator is a symbol that tells the compiler to perform specific mathematical or logical functions.
+           C language is rich in built-in operators and provides the following types of operators :
+           a) Arithmetic operators
+           b) Relational Operators
+           c) Logical Operators
+           d) Bitwise Operators
+           e) Assignment Operators
+           f) Misc Operators
+           \nWe will describe in brief the first three category of operators that is used most frequently. """,
+  'Arithmetic operators' : """ Assume variable A holds 10 and variable B holds 20, for the examples used below.\n
+(+)Adds two operands. Eg: A + B = 30\n
+(−)Subtracts second operand from the first. Eg: A − B = -10\n
+(*)Multiplies both operands. Eg: A * B = 200\n
+(/)Divides numerator by de-numerator.Eg: B / A = 2\n
+(%)Modulus Operator and remainder of after an integer division.Eg: B % A = 0\n
+(++)Increment operator increases the integer value by one.Eg:  A++ = 11\n
+(--)Decrement operator decreases the integer value by one.Eg: A-- = 9\n
+""",
+  'Relational operators' : """Assume variable A holds 10 and variable B holds 20, for the examples used below.\n
+(==) Checks if the values of two operands are equal or not. If yes, then the condition becomes true. Eg : (A == B) is not true\n
+(!=) Checks if the values of two operands are equal or not. If the values are not equal, then the condition becomes true. Eg : (A != B) is true\n
+(>) Checks if the value of left operand is greater than the value of right operand. If yes, then the condition becomes true. Eg : (A > B) is not true\n
+(<) Checks if the value of left operand is less than the value of right operand. If yes, then the condition becomes true. Eg : (A < B) is true\n
+(>=) Checks if the value of left operand is greater than or equal to the value of right operand. If yes, then the condition becomes true. Eg : (A >= B) is not true\n
+(<=) Checks if the value of left operand is less than or equal to the value of right operand. If yes, then the condition becomes true. Eg : (A <= B) is true\n
+""",
+  'Logical operators' : """Assume variable A holds 1(True) and B holds 0(False).\n
+(&&) Called Logical AND operator. If both the operands are non-zero, then the condition becomes true. Eg : (A && B) is false.\n
+(||) Called Logical OR Operator. If any of the two operands is non-zero, then the condition becomes true. Eg : (A || B) is true.\n
+(!) Called Logical NOT Operator. It is used to reverse the logical state of its operand. If a condition is true, then Logical NOT operator will make it false. Eg : !(A && B) is true.\n
+"""
+}

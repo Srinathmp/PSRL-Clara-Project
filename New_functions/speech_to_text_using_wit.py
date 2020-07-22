@@ -55,6 +55,7 @@ def RecognizeSpeech(AUDIO_FILENAME, num_seconds):
     entities = []
     try:
         text = data['text']
+        text = text.replace("\'","")
         received_audio_input = 1
     except:
         print('\nThere was some issue recording your query, please try again\n')
@@ -68,6 +69,7 @@ def RecognizeSpeech(AUDIO_FILENAME, num_seconds):
         stuff = rlinput("", default_value)
         text = stuff
         sample_text = text_clean(text)
+        sample_text = sample_text.replace("\'", "")
         # print('original text = ',text)
         if sample_text == "":
             sys.exit("You didn't give any query")

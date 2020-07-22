@@ -1,5 +1,6 @@
 import re
 import keyword
+import time
 from New_functions.built_in_functions import Interaction_module
 from New_functions.ift_analysis import ift_feedback, incorrect_conditional_exp
 from New_functions.operator_analysis import feedback_comp_operator, feedback_arth_operator, feedback_logic_operator
@@ -11,6 +12,7 @@ from Documentation.python_doc_testing import for_loop_func
 from New_functions.bot_conversation import RecognizeSpeech_during_interaction
 from gtts import gTTS
 import os
+from playsound import playsound
 ### GIVE THE MOST influential repair first and then next.
 '''
 def get_key(index_dict, val):
@@ -68,6 +70,10 @@ def compute_cost(feedback_list, programs,rep_prog, inter,args, ins):
 		print("WARNING : The cost of the repairs generated is more, recommended to analyses and make your program better to have less cost repairs")
 		print("As high cost repairs are usually not recommended to consider for debugging")
 		print("If you still prefer to look at repairs, press any key, to exit press 0")
+		speak = "Please read the warning before continuing"
+		speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+		speech_obj.save('wit_bot.mp3')
+		playsound('wit_bot.mp3', True)
 		reply = input()
 		if reply == '0':
 			print("*** Happy Coding!!! ***\n")
@@ -99,15 +105,16 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 			print("----------------------------------------------------------------\n")
 			location = display_location(clara_feedback)
 			if location != None and ' None' not in location:	
-				speak = "The location in your program where the bug is."
-				speak += location 
-				speech_obj = gTTS(text = speak, lang = 'en', slow=False)
-				speech_obj.save('wit_bot.mp3')
-				os.system("mpg321 wit_bot.mp3")
 				print("\n----------------------------------------------------------------\n")
 				print("** The location in your program where the bug detected is :")
 				print(location, "**\n")
 				print("--------------------------------------------------------------------------\n")
+				speak = "The location in your program where the bug is."
+				speak += location 
+				speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+				speech_obj.save('wit_bot.mp3')
+				#os.system("mpg123 wit_bot.mp3")
+				playsound('wit_bot.mp3', True)
 			#print("--------",clara_feedback)
 			#When an expression is to be deleted from incorrect program
 			if "Add" in clara_feedback or "Delete " in clara_feedback:
@@ -116,20 +123,23 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 				print("Clara is suggesting either to remove or add an expression in your code, this would mean that cost of repair is more")
 				print("It is recommended that you consider debugging on your own first")
 				print("\n--------------------------------------------------------------------------\n")
-				speak = "You can look at clara generated repair or prefer to quit, if you wish on debug on own"
-				speak += "Please speak out your preference now"
+				speak = "Clara is suggesting either to remove or add an expression in your code."
+				speak += "You can look at clara generated repair or prefer to quit, if you wish to debug on own"
+				speak += "Please tell your preference now"
 				speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 				speech_obj.save('wit_bot.mp3')
-				os.system("mpg321 wit_bot.mp3")
+				#os.system("mpg123 wit_bot.mp3")
+				playsound('wit_bot.mp3', True)
 				talk = 1
 				spoke = 0
 				# Giving user 3 chances to speak out incase it wasn't recorded properly
 				while(talk != 3):
 					if(spoke):
-						speak = "Please give your response now."
+						speak = "Please give your preference response now."
 						speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 						speech_obj.save('wit_bot.mp3')
-						os.system("mpg321 wit_bot.mp3")
+						#os.system("mpg123 wit_bot.mp3")
+						playsound('wit_bot.mp3', True)
 
 					spoke = 1
 					print("\n***Please speak now...\n")
@@ -143,13 +153,15 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 							print("*** Happy Coding!!! ***\n")
 							return 0
 					else:
+						print("Sorry, couldn't record voice")
 						speak = "Sorry...couldn't record your voice, please try again."
 						speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 						speech_obj.save('wit_bot.mp3')
-						os.system("mpg321 wit_bot.mp3")
+						#os.system("mpg123 wit_bot.mp3")
+						playsound('wit_bot.mp3', True)
 						#Increment to consider the chances taken up
 						talk += 1
-						return 
+				return 
 
 			# Getting the line number 
 			#### Will remove line number as not needed
@@ -179,12 +191,55 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 
 				if ' for loop ' in clara_feedback:
 					print("There is an incorrect iterated expression used in for loop\n")
-					print("To know about for loop press 1, else press any key to continue :\n")
-					choice = input()
-					if choice == '1':
-						print("\n---------------------------------------------------------------------------------------------------\n")
-						for_loop_func()
-						print("\n---------------------------------------------------------------------------------------------------\n")
+					speak = "There is an incorrect iterated expression used in for loop."
+					speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+					speech_obj.save('wit_bot.mp3')
+					playsound('wit_bot.mp3', True)
+					#Ask user preference 
+					speak = "Would You like to go through brief explanation of for loop expression .or just continue without reading."
+					speak += "Please give your preference now."
+					speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+					speech_obj.save('wit_bot.mp3')
+
+					print("Would You like to go through brief explanation of for loop, or just continue without reading\n")
+					playsound('wit_bot.mp3', True)
+					talk = 1
+					spoke = 0
+					# Giving user 3 chances to speak out incase it wasn't recorded properly
+					while(talk != 3):
+						if(spoke):
+							speak = "Please tell your preference response now."
+							speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+							speech_obj.save('wit_bot.mp3')
+							playsound('wit_bot.mp3', True)
+
+						spoke = 1
+						print("\n***Please speak now...\n")
+						reply =  RecognizeSpeech_during_interaction('myspeech.wav', 6)
+						if reply:
+							if (reply[0] == 'Agree' or reply[1] == 'on') and (reply[0] != 'Disagree'):
+								speak += "Providing brief explanation."
+								print("Go through this brief explanation of for loop.")
+								print("\n------------------------------------------------------------------------------------\n")
+								for_loop_func()
+								print("\n------------------------------------------------------------------------------------\n")
+								break
+							else:
+								break
+						else:
+							print("Sorry, couldn't interpret your response or record your voice")
+							if(talk < 2):
+								speak = "Sorry...couldn't interpret your response or record your voice, please try again."
+							else:
+								speak = "Sorry...couldn't interpret your response or record your voice."
+
+							speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+							speech_obj.save('wit_bot.mp3')
+							#os.system("mpg123 wit_bot.mp3")
+							playsound('wit_bot.mp3', True)
+							#Increment to consider the chances taken up
+							talk += 1
+
 				if bltins_error != []:
 					considered = 1
 					print("Looks like the incorrect code is due to one of the builtin method or function")
@@ -220,18 +275,55 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 			segments[1] = segments[1].split(location)[0]
 
 			if 'ite(' in clara_feedback:
+				speak = "Interpretation about error is."
+				speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+				speech_obj.save('wit_bot.mp3')
+				playsound('wit_bot.mp3', True)
+				print("\n--------------------------------------------------------------------------\n")
 				print("Looks like you have implemented if-then-else illogically with respect to the given problem statement.")
 				print("It is recommended that you read through the problem statement again, before proceeding to debug")
-				#implementation of effective feedback for ift
-				print("Press 1 for exhaustive feedback phase, orelse press 0 to exit\n")
-				reply_1 = input()
-				if(reply_1 == '0'):
-					print("*** Happy Coding!!! ***\n")
-					return 0
-				else:
-					ift_feedback(cleaned_feedback,cleaned_feedback, inputs, arguements, lang)
-				return
+				print("\n--------------------------------------------------------------------------\n")
+				#Wait for 5 seconds till user reads above statement
+				time.sleep(5)
+				speak = "Would you like to go with the exhaustive feedback phase or. you can prefer to quit, if you wish to debug on own"
+				speak += "Please tell your preference now"
+				speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+				speech_obj.save('wit_bot.mp3')
+				playsound('wit_bot.mp3', True)
+				talk = 1
+				spoke = 0
+				# Giving user 3 chances to speak out incase it wasn't recorded properly
+				while(talk != 3):
+					if(spoke):
+						speak = "Please give your response now."
+						speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+						speech_obj.save('wit_bot.mp3')
+						#os.system("mpg123 wit_bot.mp3")
+						playsound('wit_bot.mp3', True)
 
+					spoke = 1
+					print("\n***Please speak now...\n")
+					reply =  RecognizeSpeech_during_interaction('myspeech.wav', 6)
+					if reply:
+						if (reply[0] == 'Agree' or reply[1] == 'on') and (reply[0] != 'Disagree'):
+							ift_feedback(cleaned_feedback,cleaned_feedback, inputs, arguements, lang) 
+							break
+						else:
+							print("*** Happy Coding!!! ***\n")
+							return 0
+					else:
+						print("Sorry...couldn't record or interpret your response")
+						if(talk < 2):
+							speak = "Sorry...couldn't record your voice, please try again."
+						else:
+							speak = "Sorry...couldn't record your voice."
+						speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+						speech_obj.save('wit_bot.mp3')
+						#os.system("mpg123 wit_bot.mp3")
+						playsound('wit_bot.mp3', True)
+						#Increment to consider the chances taken up
+						talk += 1
+				return 
 
 			#incorrect conditional statements($cond)
 			if '$cond' in clara_feedback:
@@ -241,7 +333,7 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 
 			#check for incorrect return value
 			if ('return' in clara_feedback) or ('$ret' in clara_feedback):
-				incorrect_return(clara_feedback,cleaned_feedback,programs, rep_prog, inter, arguements, inputs)
+				incorrect_return(programs, rep_prog, inter, arguements, inputs)
 				if ' if ' in segments[0] or ' if ' in segments[1]:
 					print("Since there was 'if' statements involved, press 1 to read about it, else any key to continue")
 					ans = input()
@@ -249,7 +341,7 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 						status = ift_feedback(clara_feedback, cleaned_feedback, inputs, arguements, lang)
 						if status == 0:
 							return 0
-				print("Press 1 to continue with possible any further related repairs, else press 0 to exit")
+				print("Press 1 to continue with possibly any further related repairs, else press 0 to exit")
 				reply = input()
 				if reply == '0':
 					print("*** Happy Coding!!! ***\n")
@@ -300,6 +392,10 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 			print("Press 1 to just look at repairs directly, else press 0 to exit")
 			reply = input()
 			if reply == '1':
+				speak = "The repair generated for incorrect expression is."
+				speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+				speech_obj.save('wit_bot.mp3')
+				playsound('wit_bot.mp3', True)
 				print(cleaned_feedback,"\n")
 				print("****************************************************\n")
 			else:

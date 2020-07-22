@@ -350,7 +350,7 @@ squares = [0,1,4,9,16,25,36,49,64,81]
 
 
 return_statement = {
-    'Definition of return':"""A return statement is used to end the execution of the function call and “returns” the result (value of the expression following the return keyword) to the caller. 
+    'definition':"""A return statement is used to end the execution of the function call and “returns” the result (value of the expression following the return keyword) to the caller. 
     The statements after the return statements are not executed. If the return statement is without any expression, then the special value None is returned.
 
     Note: Return statement can not be used outside the function.
@@ -384,4 +384,43 @@ return_statement = {
     res = is_true(2<5) 
     print("\nResult of is_true function is {}".format(res)) 
     """
+}
+
+operator_entity = {
+  'definition' : """An operator is a symbol that tells the compiler to perform specific mathematical or logical functions.
+           Python language is rich in built-in operators and provides the following types of operators :
+            a) Arithmetic Operators
+            b) Comparison (Relational) Operators
+            c) Logical Operators
+            d) Assignment Operators
+            e) Bitwise Operators
+            f) Membership Operators
+            g) Identity Operators
+           \nWe will describe in brief the first three category of operators that is used most frequently. For other operators you could refer to python's standard documentation.""",
+  'Arithmetic operators' : """ Assume variable a holds 10 and variable b holds 20, for the examples used below.\n
++ Addition : Adds values on either side of the operator. Eg : a + b = 30\n
+- Subtraction : Subtracts right hand operand from left hand operand. Eg : a – b = -10\n
+* Multiplication : Multiplies values on either side of the operator. Eg : a * b = 200\n
+/ Division : Divides left hand operand by right hand operand. Eg : b / a = 2\n
+% Modulus : Divides left hand operand by right hand operand and returns remainder. Eg : b % a = 0\n
+** Exponent : Performs exponential (power) calculation on operators. Eg : a**b =10 to the power 20\n
+//  Floor Division : The division of operands where the result is the quotient in which the digits after the decimal point are removed. 
+                    But if one of the operands is negative, the result is floored, i.e., rounded away from zero (towards negative infinity).
+                    Some of the examples are : 9//2 = 4 and 9.0//2.0 = 4.0, -11//3 = -4, -11.0//3 = -4.0\n
+""",
+  'Comparison (Relational) operators' : """These operators compare the values on either sides of them and decide the relation among them. They are also called Relational operators.
+  Assume variable a holds 10 and variable b holds 20, for the examples used below.\n
+==  ,If the values of two operands are equal, then the condition becomes true. Eg : (a == b) is not true.\n
+!=  ,If values of two operands are not equal, then condition becomes true. Eg : (a != b) is true.\n
+<>  ,If values of two operands are not equal, then condition becomes true. Eg : (a <> b) is true. This is similar to != operator.\n
+>   ,If the value of left operand is greater than the value of right operand, then condition becomes true. Eg :(a > b) is not true.\n
+<   ,If the value of left operand is less than the value of right operand, then condition becomes true. Eg : (a < b) is true.\n
+>=  ,If the value of left operand is greater than or equal to the value of right operand, then condition becomes true. Eg : (a >= b) is not true.\n
+<=  ,If the value of left operand is less than or equal to the value of right operand, then condition becomes true. Eg : (a <= b) is true.\n
+""",
+  'Logical operators' : """Assume variable A holds 1(True) and B holds 0(False).\n
+(and) Called Logical AND operator. If both the operands are non-zero, then the condition becomes true. Eg : (A and B) is false.\n
+(or) Called Logical OR Operator. If any of the two operands is non-zero, then the condition becomes true. Eg : (A or B) is true.\n
+(not) Called Logical NOT Operator. It is used to reverse the logical state of its operand. If a condition is true, then Logical NOT operator will make it false. Eg : not(A and B) is true.\n
+"""
 }

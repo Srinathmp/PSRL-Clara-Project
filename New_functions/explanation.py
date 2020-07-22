@@ -12,6 +12,8 @@ engine.setProperty('rate', 170)
 ### Using google text to speech
 from gtts import gTTS
 import os
+import sys
+from playsound import playsound
 
 # import socket
 
@@ -85,7 +87,31 @@ def recognise_and_explain(entities, lang, ask):
 		# rate for speed of speech(True - slow, False = fast) 
 		rate = False 
 		if entities:
-			#engine.say("From the query obtained, the keyterms recognized are.....")
+			print(entities)
+			if 'available_documentation:available_documentation' in entities:
+				speak = "Displaying the list of available documentations."
+				speech_obj = gTTS(text = speak, lang = language, slow=rate)
+				speech_obj.save('wit_bot.mp3')
+				playsound('wit_bot.mp3', True)
+				print("Displaying the list of available documentations\n")
+				if lang == 'py':
+					from Documentation.python_doc_testing import available_documentation
+					available_documentation()
+				elif lang == 'c':
+					from Documentation.doc_testing import available_documentation
+					available_documentation()
+				print("\nIf you wish to read from any of these, press 1 else press 0 exit.\n")
+				your_wish = input()
+				if (your_wish == '0'):
+					speak = "Have a good day. Happy Learning and coding."
+					speech_obj = gTTS(text = speak, lang = language, slow=rate)
+					speech_obj.save('wit_bot.mp3')
+					playsound('wit_bot.mp3', True)
+					sys.exit("\n***Happy Coding!!!***\n")
+
+				ask += 1
+				return ask
+
 			speak = "From the query obtained, the keyterms recognized are."
 			print("\nFrom the query obtained, the keyterms recognized are:")
 
@@ -96,13 +122,15 @@ def recognise_and_explain(entities, lang, ask):
 				speak += entities[i]
 				speech_obj = gTTS(text = speak, lang = language, slow=rate)
 				speech_obj.save('wit_bot.mp3')
-				os.system("mpg321 wit_bot.mp3")
+				#os.system("mpg123 wit_bot.mp3")
+				playsound('wit_bot.mp3', True)
 
 			speak = "To strengthen the conceptual understanding,"
 			speak += "Please go through the detailed explanation of these."
 			speech_obj = gTTS(text = speak, lang = language, slow=rate)
 			speech_obj.save('wit_bot.mp3')
-			os.system("mpg321 wit_bot.mp3")
+			#os.system("mpg123 wit_bot.mp3")
+			playsound('wit_bot.mp3', True)
 			#print(entities)
 			reading = 1
 			while(reading):
@@ -113,15 +141,14 @@ def recognise_and_explain(entities, lang, ask):
 		else:
 			if(ask < 3):
 				speak = "Sorry...couldn't interpret your query, please try again"
-				speech_obj = gTTS(text = speak, lang = language, slow=rate)
-				speech_obj.save('wit_bot.mp3')
-				os.system("mpg321 wit_bot.mp3")
 				print("\nSorry!...We couldn't interpret your query as related to programming OR explanation might be unavailable, please try again\n")
 			else:
 				speak = "Sorry...couldn't interpret your query."
-				speech_obj = gTTS(text = speak, lang = language, slow=rate)
-				speech_obj.save('wit_bot.mp3')
-				os.system("mpg321 wit_bot.mp3")
+				print("Sorry...couldn't interpret your query")
+			speech_obj = gTTS(text = speak, lang = language, slow=rate)
+			speech_obj.save('wit_bot.mp3')
+			#os.system("mpg123 wit_bot.mp3")
+			playsound('wit_bot.mp3', True)
 
 			ask = ask + 1
 			return ask
@@ -130,7 +157,8 @@ def recognise_and_explain(entities, lang, ask):
 		speak = "Have a Good day. Happy learning and coding!"
 		speech_obj = gTTS(text = speak, lang = language, slow=rate)
 		speech_obj.save('wit_bot.mp3')
-		os.system("mpg321 wit_bot.mp3")
+		#os.system("mpg123 wit_bot.mp3")
+		playsound('wit_bot.mp3', True)
 		# print("\n***Happing Learning***\n")
 		sys.exit("\n***Happing Learning***\n")
 

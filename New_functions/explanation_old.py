@@ -113,13 +113,13 @@ def recognise_and_explain(entities, lang):
 				speak += entities[i]
 				speech_obj = gTTS(text = speak, lang = language, slow=rate)
 				speech_obj.save('wit_bot.mp3')
-				os.system("mpg321 wit_bot.mp3")
+				os.system("mpg123 wit_bot.mp3")
 
 			speak = "To strengthen the conceptual understanding,..."
 			speak += "Please go through the detailed explanation of these."
 			speech_obj = gTTS(text = speak, lang = language, slow=rate)
 			speech_obj.save('wit_bot.mp3')
-			os.system("mpg321 wit_bot.mp3")
+			os.system("mpg123 wit_bot.mp3")
 			#print(entities)
 			reading = 1
 			while(reading):
@@ -139,7 +139,7 @@ def recognise_and_explain(entities, lang):
 				speak = "To revisit the keywords recognised for explanation,press 1, else press 0 to exit"
 				speech_obj = gTTS(text = speak, lang = language, slow=rate)
 				speech_obj.save('wit_bot.mp3')
-				os.system("mpg321 wit_bot.mp3")
+				os.system("mpg123 wit_bot.mp3")
 				print("\nIf you would like to revisit the keywords recognised, to read further,press 1, else press 0 to exit\n")
 				#-------------------------------------------------------------------------
 				reading = int(input())
@@ -148,7 +148,7 @@ def recognise_and_explain(entities, lang):
 			speak = "Sorry...couldn't interpret your query, please try again"
 			speech_obj = gTTS(text = speak, lang = language, slow=rate)
 			speech_obj.save('wit_bot.mp3')
-			os.system("mpg321 wit_bot.mp3")
+			os.system("mpg123 wit_bot.mp3")
 			print("\nSorry!...We couldn't interpret your query as related to programming OR explanation might be unavailable, please try again\n")
 
 			print("\nPress 1 to try again, else 0 to exit\n")
@@ -159,7 +159,7 @@ def recognise_and_explain(entities, lang):
 		speak = "Have a Good day. Happy learning and coding!"
 		speech_obj = gTTS(text = speak, lang = language, slow=rate)
 		speech_obj.save('wit_bot.mp3')
-		os.system("mpg321 wit_bot.mp3")
+		os.system("mpg123 wit_bot.mp3")
 		print("\n***Happing Learning***\n")
 
 	except Exception as err:

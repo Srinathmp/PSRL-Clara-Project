@@ -54,6 +54,7 @@ def RecognizeSpeech_during_interaction(AUDIO_FILENAME, num_seconds):
     response = []
     try:
         text = data['text']
+        text = text.replace("\'","")
         received_audio_input = 1
     except:
         print('\nThere was some issue recording your query, please try again\n')
@@ -67,6 +68,7 @@ def RecognizeSpeech_during_interaction(AUDIO_FILENAME, num_seconds):
         stuff = rlinput("", default_value)
         text = stuff
         sample_text = text_clean(text)
+        sample_text = sample_text.replace("\'", "")
         # print('original text = ',text)
         if sample_text == "":
             sys.exit("You didn't give any query")
@@ -85,10 +87,14 @@ def RecognizeSpeech_during_interaction(AUDIO_FILENAME, num_seconds):
         # print('standard output=',stdout)
         # print('final output=',type(stdout))
         final_dict =json.loads(stdout)
-        #print('final_dict = ',(final_dict['entities'].keys()))
         if final_dict['intents']:
         	response.append(final_dict['intents'][0]['name'])
+        else:
+        	response.append(None)
+        if final_dict['traits']:
         	response.append(final_dict['traits']['wit$on_off'][0]['value'])
+        else:
+        	response.append(None)
     #-----------------------------------------------------------
     print("\nYour final query: {}".format(text))
     # return the entity list
