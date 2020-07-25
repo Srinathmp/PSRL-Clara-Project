@@ -1,22 +1,16 @@
 from clara.interpreter import getlanginter
 from New_functions.documenting import return_explanation
-#import sys
+
 import string
 import re
 
 ### Imports for voice 
 from gtts import gTTS
-# import os
 from playsound import playsound
 from New_functions.bot_conversation import RecognizeSpeech_during_interaction
 from New_functions.operator_analysis import explain_in_brief
 
 def compare_outputs(programs, inter,args, ins):
-	# print("Arguements are : ", args)
-	# print("The len :", len(programs))
-	# inter = getlanginter(lang)
-	# inter = inter('main')
-	# trace = Interpreter.run(programs[0], args, ins)
 	try:
 		flag = 0 ### Needed because sometimes though output match for given test cases,
 				 ### But for some unseen cases it might go wrong(because repair is generated)	
@@ -33,13 +27,10 @@ def compare_outputs(programs, inter,args, ins):
 				incorrect_ans = trace_incorrect[inc_len][2]["$out'"].replace('\\n',' , ').strip(' , ')
 				correct_ans = trace_correct[c_len][2]["$out'"].replace('\\n',' , ').strip(' , ')
 
-				# print(correct_ans)
-				# print(incorrect_ans)
 				while correct_ans == incorrect_ans:
 					inc_len = inc_len-1
 					c_len = c_len-1
 					if c_len < 0 or inc_len < 0:
-						#print("Outputs match, but since repairs are generated, it might not work when passed through exhaustive test cases\n")
 						 break
 					incorrect_ans = trace_incorrect[inc_len][2]["$out'"].replace('\\n',' , ').strip(' , ')
 					correct_ans = trace_correct[c_len][2]["$out'"].replace('\\n',' , ').strip(' , ')
@@ -47,7 +38,7 @@ def compare_outputs(programs, inter,args, ins):
 
 				if correct_ans != incorrect_ans:
 					flag = 1
-					### Have implemented for better output but it cannot be generalized
+					### Had implemented for better output but it cannot be generalized
 					# # To remove the input part from the output which we are displaying
 					# correct_inpt_part = trace_correct[0][2]["$out'"].replace('\\n',' , ').strip(' , ')
 					# incorrect_inpt_part = trace_incorrect[0][2]["$out'"].replace('\\n',' , ').strip(' , ')
@@ -81,57 +72,11 @@ def incorrect_return(programs,rep_prog, inter, args, ins):
 	### The trace would be useful only if a common function naming is followed(usually given to implement specific function)
 	print("There is an incorrect value returned",end = ".")
 	speak = "There is incorrect value returned by the function."
-	# speak += "Would You like to go through brief explanation of return expressions or just continue without reading."
-	# speak += "Please give your preference now."
 	speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 	speech_obj.save('wit_bot.mp3')
 	playsound('wit_bot.mp3', True)
 	###Calling function to take user preference
 	explain_in_brief("return expressions", return_explanation.__doc__)
-
-	# print("Would You like to go through brief explanation of return expressions or just continue without reading\n")
-	# playsound('wit_bot.mp3', True)
-	# talk = 1
-	# spoke = 0
-	# # Giving user 3 chances to speak out incase it wasn't recorded properly
-	# while(talk != 3):
-	# 	if(spoke):
-	# 		speak = "Please tell your preference response now."
-	# 		speech_obj = gTTS(text = speak, lang = 'en', slow=False)
-	# 		speech_obj.save('wit_bot.mp3')
-	# 		playsound('wit_bot.mp3', True)
-
-	# 	spoke = 1
-	# 	print("\n***Please speak now...\n")
-	# 	reply =  RecognizeSpeech_during_interaction('myspeech.wav', 6)
-	# 	if reply:
-	# 		if (reply[0] == 'Agree' or reply[1] == 'on') and (reply[0] != 'Disagree'):
-	# 			speak += "Providing brief explanation."
-	# 			print("Go through this brief explanation of return expression.")
-	# 			print("\n------------------------------------------------------------------------------------\n")
-	# 			print(return_explanation.__doc__)
-	# 			#return_explanation()
-	# 			print("\n------------------------------------------------------------------------------------\n")
-
-	# 			speak = return_explanation.__doc__
-	# 			speech_obj = gTTS(text = speak, lang = 'en', slow=False)
-	# 			speech_obj.save('wit_bot.mp3')
-	# 			playsound('wit_bot.mp3', True)
-	# 		else:
-	# 			break
-	# 	else:
-	# 		print("Sorry, couldn't interpret your response or record your voice")
-	# 		if(talk < 2):
-	# 			speak = "Sorry...couldn't interpret your response or record your voice, please try again."
-	# 		else:
-	# 			speak = "Sorry...couldn't interpret your response or record your voice."
-
-	# 		speech_obj = gTTS(text = speak, lang = 'en', slow=False)
-	# 		speech_obj.save('wit_bot.mp3')
-	# 		#os.system("mpg123 wit_bot.mp3")
-	# 		playsound('wit_bot.mp3', True)
-	# 		#Increment to consider the chances taken up
-	# 		talk += 1
 
 	print("Press 1 to continue with comparing correct and incorrect return value, once you are done reading.\n")
 	print("NOTE : Press 1 only if given programming template for this problem is followed, else press any key to continue\n")
@@ -139,7 +84,6 @@ def incorrect_return(programs,rep_prog, inter, args, ins):
 	if reply == '1':
 		# extracting the index of the referenced program to generate repair 
 		referenced_prog = rep_prog[1]
-		#print(referenced_prog)
 		index = 1
 		if '.c' in referenced_prog:
 			index = referenced_prog.split('.c')[0][-1] #This gives the representative program number in cluster
@@ -154,7 +98,6 @@ def incorrect_return(programs,rep_prog, inter, args, ins):
 					### Have to look for getting the program which is being referenced from the cluster
 					trace_correct = inter.run(programs[index], None, test_case, args)
 
-					# inc_len = len(trace_incorrect)-1
 					c_len = len(trace_correct)-1
 					#Now compare outputs for each test cases and on encountering first mismatch return 
 					### For multiple test cases it should be of form --ins "[[21,31],[44,43]]", here there are 2 test cases
@@ -165,7 +108,6 @@ def incorrect_return(programs,rep_prog, inter, args, ins):
 					while correct_return == incorrect_return:
 						i = i+1
 						if i > c_len:
-							#print("Values returned match, but since repairs are generated, it might not work when passed through exhaustive test cases\n")
 							break
 						incorrect_return = trace_incorrect[i][2]["$ret'"]
 						correct_return = trace_correct[i][2]["$ret'"]
@@ -185,10 +127,6 @@ def incorrect_return(programs,rep_prog, inter, args, ins):
 					trace_correct = inter.run(programs[index],None, ins , test_case)
 
 					# ### The last trace of the function includes the final return value
-					# incorrect_return = trace_incorrect[-1][2]["$ret'"]
-					# correct_return = trace_correct[-1][2]["$ret'"]
-
-					# inc_len = len(trace_incorrect)-1
 					c_len = len(trace_correct)-1
 					#Now compare outputs for each test cases and on encountering first mismatch return 
 					### For multiple test cases it should be of form --ins "[[21,31],[44,43]]", here there are 2 test cases
@@ -199,7 +137,6 @@ def incorrect_return(programs,rep_prog, inter, args, ins):
 					while correct_return == incorrect_return:
 						i = i +1
 						if i > c_len:
-							#print("Values returned match, but since repairs are generated, it might not work when passed through exhaustive test cases\n")
 							break 
 						incorrect_return = trace_incorrect[i][2]["$ret'"]
 						correct_return = trace_correct[i][2]["$ret'"]

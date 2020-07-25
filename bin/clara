@@ -476,7 +476,6 @@ Options are:
                             speak += ".Have a Good day. Happy learning and coding!"
                             speech_obj = gTTS(text = speak, lang = 'en', slow=False)
                             speech_obj.save('wit_bot.mp3')
-                            #os.system("mpg123 wit_bot.mp3")
                             playsound('wit_bot.mp3', True)
                             sys.exit("*** Happy Coding!!! ***\n")
 

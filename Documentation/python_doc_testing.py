@@ -319,3 +319,10 @@ def available_documentation():
 	'list data structure','return statement']
 	for i in range(len(all_doc)):
 		print(i+1,': ',all_doc[i])
+
+### Just returning the list of documentations
+def documentation_list():
+	all_doc = ['if statement','else statement','elif statement','nested if statement','range function','break and continue statements and else clauses on loops','while loop','for loop',
+	'list data structure','return statement']
+
+	return all_doc

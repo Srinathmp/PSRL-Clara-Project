@@ -2,9 +2,10 @@
 #To store the document string of builtin modules as its value in dictionary 
 # And key as the module name
 
-from New_functions.documenting import built_in
-#import sys
+
 import struct
+from gtts import gTTS
+from playsound import playsound
 '''
 for keywords:
 	import keyword
@@ -19,17 +20,23 @@ print(blt_ins['range'])
 #Python 2 version
 def Interaction_module(clara_feedback,cleaned_feedback, blt, args):
 	print(blt +":- This is the builtin function where you have gone wrong")
+	speak = "You have used"+blt+"function incorrectly specifically to this problem statement."
+	speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+	speech_obj.save('wit_bot.mp3')
+	playsound('wit_bot.mp3', True)
+
 	print("Probably you might have passed incorrect values as parameter")
 	print("Would you prefer having a quick glance at the explanation about the " + blt+"?")
 	print("yes/no\n")
 	reply_2 = input()
 	if(reply_2 == 'yes' or reply_2 == 'Yes' or reply_2 == 'YES'):
-		print("Here is the standard document string of "+blt +" method:\n")
+		print("Here is the standard doc string of "+blt +" method:\n")
+		speak = "Go through this standard documentation."
+		speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+		speech_obj.save('wit_bot.mp3')
+		playsound('wit_bot.mp3', True)
 		print(eval(blt).__doc__)
-		print("\nFor read out loud the above explanation press 1, else press any key to continue\n")
-		reply = input()
-		if reply == '1':
-			built_in(blt)
+
 	print("\nWould you like to debug on your own?")
 	print("yes/no")
 	reply_4 = input()

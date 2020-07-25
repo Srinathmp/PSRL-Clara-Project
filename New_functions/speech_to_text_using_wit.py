@@ -98,12 +98,6 @@ def RecognizeSpeech(AUDIO_FILENAME, num_seconds):
     # return the entity list
     return entities
 
-
-# if __name__ == "__main__":
-#     ### When calling RecognizeSpeech function by clara, then pass language as parameter too
-#     lang = 'py'
-#     entities =  RecognizeSpeech('myspeech.wav', 6)
-#     recognise_and_explain(entities, lang)
     
 
 

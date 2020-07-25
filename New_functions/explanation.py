@@ -5,13 +5,8 @@ import pyttsx3
 # initialisation 
 engine = pyttsx3.init()
 
-#Customizing properties
-engine.setProperty('voice', 'english+f4')
-engine.setProperty('rate', 170)
-
 ### Using google text to speech
 from gtts import gTTS
-import os
 import sys
 from playsound import playsound
 
@@ -28,66 +23,21 @@ from playsound import playsound
 #     return False
 
 def recognise_and_explain(entities, lang, ask):
-		### Include entities return, variable, operator
-		
-	#print(entities)
-
-	## Creating dictionary of entity as key and function call as value
-	# if(not is_connected()):
-	# 	try:
-	# 		if entities:
-	# 			print("From the query obtained, the keyterms recognized are:")
-	# 			engine.say("From the query obtained, the keyterms recognized are.....")
-	# 			for i in range(len(entities)):
-	# 				entities[i] = (entities[i].split(':')[0]).replace('_entity', '')
-	# 				print(i+1,':=',entities[i])
-	# 				engine.say(entities[i])
-
-	# 			engine.runAndWait()
-	# 			engine.say("To strengthen the conceptual understanding,")
-	# 			engine.say("Please go through the detailed explanation of these.")
-	# 			engine.runAndWait()
-	# 			#print(entities)
-	# 			reading = 1
-	# 			while(reading):
-	# 				for entity in entities:
-	# 					print("\nTo continue reading about,",entity,"Press 1, else press any key to continue :\n")
-	# 					reply = input()
-	# 					if reply == '1':
-	# 						if entity in list(entity_func_dict.keys()):
-	# 							entity_func_dict[entity]()
-	# 						else:
-	# 							print("Sorry!...We don't have related documentation for,",entity,"keyterm\n")
-	# 							engine.say("Sorry...")
-	# 							engine.runAndWait()
-	# 				print("\nIf you would like to revisit the keywords recognised, to read further,press 1, else press 0 to exit\n")
-	# 				engine.say("To revisit the keywords recognised for explanation,press 1, else press 0 to exit")
-	# 				engine.runAndWait()
-	# 				reading = int(input())
-
-	# 		else:
-	# 			print("Sorry!...We couldn't interpret your query as related to programming OR explanation might be unavailable, please try again\n")
-	# 			engine.say("Sorry...couldn't interpret your query, please try again")
-	# 			engine.runAndWait()
-	# 			print("\nPress 1 to try again, else 0 to exit\n")
-	# 			ask = input()
-	# 			return ask
-
-
-	# 		print("\n***Happing Learning***\n")
-	# 		engine.say("Have a Good day. Happy learning and coding")
-	# 		engine.runAndWait()
-
-	# 	except Exception as err:
-	# 		print("Exception arose is,",err)
-	# else:
-	# 	# print("Using google speech\n")
 	try:
+		if lang == 'py':
+			prog_lang = 'Python'
+			from Documentation.python_doc_testing import documentation_list
+			#Storing the list of all the available documentations in the used programming language
+			all_docs = documentation_list()
+		elif lang == 'c':
+			prog_lang = 'C language'
+			from Documentation.doc_testing import documentation_list
+			#Storing the list of all the available documentations in the used programming language
+			all_docs = documentation_list()
 		language = 'en'
 		# rate for speed of speech(True - slow, False = fast) 
 		rate = False 
 		if entities:
-			print(entities)
 			if 'available_documentation:available_documentation' in entities:
 				speak = "Displaying the list of available documentations."
 				speech_obj = gTTS(text = speak, lang = language, slow=rate)
@@ -100,7 +50,7 @@ def recognise_and_explain(entities, lang, ask):
 				elif lang == 'c':
 					from Documentation.doc_testing import available_documentation
 					available_documentation()
-				print("\nIf you wish to read from any of these, press 1 else press 0 exit.\n")
+				print("\nIf you wish to read from any of these, press 1 and you will be redirected to ask query, else press 0 exit.\n")
 				your_wish = input()
 				if (your_wish == '0'):
 					speak = "Have a good day. Happy Learning and coding."
@@ -109,35 +59,43 @@ def recognise_and_explain(entities, lang, ask):
 					playsound('wit_bot.mp3', True)
 					sys.exit("\n***Happy Coding!!!***\n")
 
-				ask += 1
+				ask = 2
 				return ask
 
-			speak = "From the query obtained, the keyterms recognized are."
-			print("\nFrom the query obtained, the keyterms recognized are:")
+			### Check whether the entities recognised are relevant to the programming language that he is working on
+			### Stored in another list 
+			relevant_entities = []
+			speak = "From the query obtained, the keyterms recognized, relevant to."+prog_lang+"are."
+			print("\nFrom the query obtained, the keyterms recognized relevant to the",prog_lang,"are:")
 
 			for i in range(len(entities)):
 				entities[i] = (entities[i].split(':')[0]).replace('_entity', '')
-				print(i+1,':=',entities[i])
-				#engine.say(entities[i])
-				speak += entities[i]
-				speech_obj = gTTS(text = speak, lang = language, slow=rate)
-				speech_obj.save('wit_bot.mp3')
-				#os.system("mpg123 wit_bot.mp3")
-				playsound('wit_bot.mp3', True)
+				flag = 0 ### Represents entity found not relevant to the programming language that the user is using
+				for doc in all_docs:
+					# print("entity: ", entities[i])
+					# print("Docs : ", doc)
+					if entities[i] in doc:
+						flag = 1
+						break
+				if flag:
+					print('=>',entities[i])
+					speak += entities[i]
+					speech_obj = gTTS(text = speak, lang = language, slow=rate)
+					speech_obj.save('wit_bot.mp3')
+					playsound('wit_bot.mp3', True)
+					relevant_entities.append(entities[i])
 
 			speak = "To strengthen the conceptual understanding,"
 			speak += "Please go through the detailed explanation of these."
 			speech_obj = gTTS(text = speak, lang = language, slow=rate)
 			speech_obj.save('wit_bot.mp3')
-			#os.system("mpg123 wit_bot.mp3")
+			
 			playsound('wit_bot.mp3', True)
-			#print(entities)
+			
 			reading = 1
 			while(reading):
-				### Section to be modified(Total voice based)
-				#-----------------------------------------------------------------
 				#Function to perform casual interaction with the bot
-				reading = conversation(entities, lang)
+				reading = conversation(relevant_entities, lang)
 		else:
 			if(ask < 3):
 				speak = "Sorry...couldn't interpret your query, please try again"

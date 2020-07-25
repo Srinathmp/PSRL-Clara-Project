@@ -453,3 +453,121 @@ operator_entity = {
 (!) Called Logical NOT Operator. It is used to reverse the logical state of its operand. If a condition is true, then Logical NOT operator will make it false. Eg : !(A && B) is true.\n
 """
 }
+
+local_variable = {
+  'definition':"""A variable that is declared and used inside the function or block is called local variable.
+It’s scope is limited to function or block.It cannot be used outside the block.Local variables need
+to be initialized before use.""",
+'Example':"""
+#include <stdio.h>
+void function() {
+int x = 10; // local variable
+}
+
+int main()
+{
+function();
+}
+In the above code x can be used only in the scope of function() . Using it in main function will give error.
+"""
+}
+
+global_variable = {
+  'definition':"A variable that is declared outside the function or block is called a global variable. It is declared at the starting of program. It is available to all the functions.",
+  'Example':"""
+  #include <stdio.h>
+int x = 20;//global variable
+void function1()
+{
+printf("%d\n" , x);
+}
+void function2()
+{
+printf("%d\n" , x);
+}
+int main() {
+
+function1();
+function2();
+  return 0;
+}
+
+output
+20
+20
+"""
+}
+
+static_variable = {
+  'definition':"""A variable that retains its value between multiple function calls is known as static variable.
+It is declared with the static keyword.""",
+'Example':"""
+#include <stdio.h>
+void function(){
+int x = 20;//local variable
+static int y = 30;//static variable
+x = x + 10;
+y = y + 10;
+printf("\n%d,%d",x,y);
+}
+int main() {
+
+function();
+function();
+function();
+return 0;
+}
+
+output:
+30,40
+30,50
+30,60
+In the above example , local variable will always print same value whenever function will be called whereas static variable will print the incremented value in each function call.
+"""
+
+}
+
+automatic_variable = {
+  'definition':"""
+  All variables in C that are declared inside the block, are automatic variables by default. We
+can explicitly declare an automatic variable using auto keyword.Automatic variables are similar as
+local variables.
+""",
+'Example':
+"""
+#include <stdio.h>
+void function()
+{
+int x=10;//local variable (also automatic)
+auto int y=20;//automatic variable
+}
+int main() {
+
+  function();
+  return 0;
+}
+
+In the above example both x and y are automatic variables .The only difference is that variable y is explicitly declared with auto keyword.
+"""
+}
+
+external_variable = {
+  'definition':"""External variable can be shared between multiple C files.We can declare external variable using
+extern keyword.""",
+'Example':
+"""
+ myfile.h
+
+  extern int x=10;//external variable (also global)  
+
+   
+  program1.c
+  #include "myfile.h"  
+  #include <stdio.h>  
+  void printValue(){  
+  printf("Global variable: %d", global_variable);  
+  }  
+
+In the above example x is an external variable which is used in multiple files.
+  """
+}

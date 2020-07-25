@@ -2,13 +2,13 @@
 #Challenge to give a good explanation and reason behind the operator error occured, would like to look at 
 #test case output for giving comparison between change in output with operator change
 from New_functions.documenting import arithmetic_op, relational_op
-#import sys
 ### Importing voice based dependencies
 from New_functions.bot_conversation import RecognizeSpeech_during_interaction
 import time
 from gtts import gTTS
 from playsound import playsound
 
+### Function used in common to take user preference 
 def explain_in_brief(category, documentation):
 	speak = "Would You like to go through brief explanation of "+ category+".or just continue without reading."
 	speak += "Please give your preference now."
@@ -20,7 +20,7 @@ def explain_in_brief(category, documentation):
 	talk = 1
 	spoke = 0
 	# Giving user 3 chances to speak out incase it wasn't recorded properly
-	while(talk != 3):
+	while(talk != 4):
 		if(spoke):
 			speak = "Please tell your preference response now."
 			speech_obj = gTTS(text = speak, lang = 'en', slow=False)
@@ -48,14 +48,13 @@ def explain_in_brief(category, documentation):
 				break
 		else:
 			print("Sorry, couldn't interpret your response or record your voice")
-			if(talk < 2):
+			if(talk < 3):
 				speak = "Sorry...couldn't interpret your response or record your voice, please try again."
 			else:
 				speak = "Sorry...couldn't interpret your response or record your voice."
 
 			speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 			speech_obj.save('wit_bot.mp3')
-			#os.system("mpg123 wit_bot.mp3")
 			playsound('wit_bot.mp3', True)
 			#Increment to consider the chances taken up
 			talk += 1
@@ -200,17 +199,15 @@ def feedback_incorrect_value(n1, n2, clara_feedback,cleaned_feedback,ins, args):
 		speak += ".Please tell your preference now."
 		speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 		speech_obj.save('wit_bot.mp3')
-		#os.system("mpg123 wit_bot.mp3")
 		playsound('wit_bot.mp3', True)
 		talk = 1
 		spoke = 0
 		# Giving user 3 chances to speak out incase it wasn't recorded properly
-		while(talk != 3):
+		while(talk != 4):
 			if(spoke):
 				speak = "Please give your response now."
 				speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 				speech_obj.save('wit_bot.mp3')
-				#os.system("mpg123 wit_bot.mp3")
 				playsound('wit_bot.mp3', True)
 
 			spoke = 1
@@ -230,14 +227,13 @@ def feedback_incorrect_value(n1, n2, clara_feedback,cleaned_feedback,ins, args):
 					return 0
 			else:
 				print("Sorry, couldn't interpret your response or record your voice")
-				if(talk < 2):
+				if(talk < 3):
 					speak = "Sorry...couldn't interpret your response or record your voice, please try again."
 				else:
 					speak = "Sorry...couldn't interpret your response or record your voice."
 
 				speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 				speech_obj.save('wit_bot.mp3')
-				#os.system("mpg123 wit_bot.mp3")
 				playsound('wit_bot.mp3', True)
 				#Increment to consider the chances taken up
 				talk += 1

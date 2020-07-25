@@ -1,4 +1,4 @@
-#Effective detailed ift feedback implementation, prettify ift
+#Effective detailed ift feedback implementation and conditional expressions
 #also provide comparison for some test case between correct implementation output and incorrect implementation output
 
 import sys
@@ -9,7 +9,6 @@ from Documentation.python_doc_testing import if_statement_func, else_statement_f
 from New_functions.bot_conversation import RecognizeSpeech_during_interaction
 from New_functions.operator_analysis import explain_in_brief
 from gtts import gTTS
-import os
 from playsound import playsound
 
 def ift_feedback(clara_feedback,cleaned_feedback, ins,args, lang):
@@ -19,7 +18,6 @@ def ift_feedback(clara_feedback,cleaned_feedback, ins,args, lang):
 	speak += "Please select your option for any further explanation required."
 	speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 	speech_obj.save('wit_bot.mp3')
-	#os.system("mpg123 wit_bot.mp3")
 	playsound('wit_bot.mp3', True)
 
 	print("\n----------------------------------------------------------------\n")
@@ -32,19 +30,14 @@ def ift_feedback(clara_feedback,cleaned_feedback, ins,args, lang):
 	if reply == '1':
 		print("\n------------------------------------------------------------------------------------\n")
 		print(ift_explanation.__doc__)
-		#Uncomment if offline text to speech is required to read out the doc
-		#ift_explanation()
 		speak = "As it's control flow depends on the evaluation of the condition specified."
 		speak += "Which is evaluated in conditional expressions.Read about conditional statements below"
 		speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 		speech_obj.save('wit_bot.mp3')
-		#os.system("mpg123 wit_bot.mp3")
 		playsound('wit_bot.mp3', True)
 		print("\n------------------------------------------------------------------------------------\n")
 		print("Defining Conditional statements :\n")
 		print(conditional_statement.__doc__)
-		#Uncomment if offline text to speech is required to read out the doc
-		#conditional_statement()
 		print("\n------------------------------------------------------------------------------------\n")
 		print("Press 1 if you need detailed explanation, else press any key to continue\n")
 		reply_1 = input()
@@ -87,7 +80,6 @@ def ift_feedback(clara_feedback,cleaned_feedback, ins,args, lang):
 		speak = "Have a look at the generated repair for your program"
 		speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 		speech_obj.save('wit_bot.mp3')
-		#os.system("mpg123 wit_bot.mp3")
 		playsound('wit_bot.mp3', True)
 		return 
 
@@ -97,7 +89,6 @@ def ift_feedback(clara_feedback,cleaned_feedback, ins,args, lang):
 	speak += ".Please tell your preference now."
 	speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 	speech_obj.save('wit_bot.mp3')
-	#os.system("mpg123 wit_bot.mp3")
 	playsound('wit_bot.mp3', True)
 	talk = 1
 	spoke = 0
@@ -107,7 +98,6 @@ def ift_feedback(clara_feedback,cleaned_feedback, ins,args, lang):
 			speak = "Please give your response now."
 			speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 			speech_obj.save('wit_bot.mp3')
-			#os.system("mpg123 wit_bot.mp3")
 			playsound('wit_bot.mp3', True)
 
 		spoke = 1
@@ -134,7 +124,6 @@ def ift_feedback(clara_feedback,cleaned_feedback, ins,args, lang):
 
 			speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 			speech_obj.save('wit_bot.mp3')
-			#os.system("mpg123 wit_bot.mp3")
 			playsound('wit_bot.mp3', True)
 			#Increment to consider the chances taken up
 			talk += 1
@@ -155,7 +144,7 @@ def incorrect_conditional_exp(clara_feedback, ins, args):
 	speech_obj.save('wit_bot.mp3')
 	playsound('wit_bot.mp3', True)
 	explain_in_brief("boolean expression",boolean.__doc__)
-	### HAVE to consider to implement a wait based on user preference
+	### To implement a wait based on user preference, have considered user giving their preference as input
 	### that is making it more user pase
 	print("Press 1 to continue with possibly any further related repairs, else press 0 to exit")
 	reply = input()

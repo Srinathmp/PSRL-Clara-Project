@@ -229,9 +229,160 @@ def operator_function():
 		else:
 			print('Invalid response')
 
+### Functions handling the variables documentation in the c programming language
+
+def variable_func():
+	print("Variables are used to store information to be referenced and manipulated in a computer program. They also provide a way of labeling data with a descriptive name, so our programs can be understood more clearly by the reader and ourselves. It is helpful to think of variables as containers that hold information.")
+	speak = "Variables are used to store information to be referenced and manipulated in a computer program."
+	speak += "...Go through the categories of variables."
+	speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+	speech_obj.save('wit_bot.mp3')
+	playsound('wit_bot.mp3', True)
+
+def local_variable_func():
+	print(local_variable['definition'])
+	speak = "The brief definition of local variable expression is."
+	speak += local_variable['definition']
+	speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+	speech_obj.save('wit_bot.mp3')
+	playsound('wit_bot.mp3', True)
+
+	print('What would you like to know about local variable ?')
+	print('The subcategories available are :')
+	dict_keys = list(local_variable.keys())
+	j = 1
+	for i in dict_keys:
+		print(j,':',i)
+		j = j+1
+	response =1
+	while(response!=0):
+		print('Enter the number of subcategory in local variable that you wish to see ,else press 0 to end explanation phase')
+		response = int(input())
+		if(response in range(1,len(dict_keys)+1)):
+			print(dict_keys[response-1]," : ",local_variable[dict_keys[response-1]])
+		elif response == 0:
+			return
+		else:
+			print('Invalid response')
+
+
+def global_variable_func():
+	print(global_variable['definition'])
+	speak = "The brief definition of global variable expression is."
+	speak += global_variable['definition']
+	speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+	speech_obj.save('wit_bot.mp3')
+	playsound('wit_bot.mp3', True)
+
+	print('What would you like to know about global variable loop ?')
+	print('The subcategories available are :')
+	dict_keys = list(global_variable.keys())
+	j = 1
+	for i in dict_keys:
+		print(j,':',i)
+		j = j+1
+	response =1
+	while(response!=0):
+		print('Enter the number of subcategory in  global variable that you wish to see ,else press 0 to end explanation phase')
+		response = int(input())
+		if(response in range(1,len(dict_keys)+1)):
+			print(dict_keys[response-1]," : ",global_variable[dict_keys[response-1]])
+		elif response == 0:
+			return
+		else:
+			print('Invalid response')
+
+
+def static_variable_func():
+	print(static_variable['definition'])
+	speak = "The brief definition of static variable expression is."
+	speak += static_variable['definition']
+	speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+	speech_obj.save('wit_bot.mp3')
+	playsound('wit_bot.mp3', True)
+
+	print('What would you like to know about static variable loop ?')
+	print('The subcategories available are :')
+	dict_keys = list(static_variable.keys())
+	j = 1
+	for i in dict_keys:
+		print(j,':',i)
+		j = j+1
+
+	response =1
+	while(response!=0):
+		print('Enter the number of subcategory in  static variable that you wish to see ,else press 0 to end explanation phase')
+		response = int(input())
+		if(response in range(1,len(dict_keys)+1)):
+			print(dict_keys[response-1]," : ",static_variable[dict_keys[response-1]])
+		elif response == 0:
+			return
+		else:
+			print('Invalid response')
+
+
+def automatic_variable_func():
+	print(automatic_variable['definition'])
+	speak = "The brief definition of automatic variable expression is."
+	speak += automatic_variable['definition']
+	speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+	speech_obj.save('wit_bot.mp3')
+	playsound('wit_bot.mp3', True)
+
+	print('What would you like to know about automatic variable loop ?')
+	print('The subcategories available are :')
+	dict_keys = list(automatic_variable.keys())
+	j = 1
+	for i in dict_keys:
+		print(j,':',i)
+		j = j+1
+	response =1
+	while(response!=0):
+		print('Enter the number of subcategory in automatic variable that you wish to see ,else press 0 to end explanation phase')
+		response = int(input())
+		if(response in range(1,len(dict_keys)+1)):
+			print(dict_keys[response-1]," : ",automatic_variable[dict_keys[response-1]])
+		elif response == 0:
+			return
+		else:
+			print('Invalid response')
+
+def external_variable_func():
+	print(external_variable['definition'])
+	speak = "The brief definition of external variable expression is."
+	speak += external_variable['definition']
+	speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+	speech_obj.save('wit_bot.mp3')
+	playsound('wit_bot.mp3', True)
+
+	print('What would you like to know about external variable loop ?')
+	print('The subcategories available are :')
+	dict_keys = list(external_variable.keys())
+	j = 1
+	for i in dict_keys:
+		print(j,':',i)
+		j = j+1
+	response =1
+	while(response!=0):
+		print('Enter the number of subcategory in external variable that you wish to see ,else press 0 to end explanation phase')
+		response = int(input())
+		if(response in range(1,len(dict_keys)+1)):
+			print(dict_keys[response-1]," : ",external_variable[dict_keys[response-1]])
+		elif response == 0:
+			return
+		else:
+			print('Invalid response')
+
 ### To display the list of all the documentations available
 def available_documentation():
 	all_doc = ['if statement','else statement','break and continue statements ','while loop','for loop',
-	'array data structure','return statement']
+			'array data structure','return statement','local variable','global variable','static variable','external variable','automatic variable']
 	for i in range(len(all_doc)):
 		print(i+1,': ',all_doc[i])
+
+### Just returning the list of documentations
+def documentation_list():
+	all_doc = ['if statement','else statement','break and continue statements ','while loop','for loop',
+			'array data structure','return statement','local variables','global variables','static variables','external variables','automatic variables']
+
+	return all_doc
