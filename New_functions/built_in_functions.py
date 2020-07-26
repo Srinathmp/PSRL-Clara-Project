@@ -20,12 +20,12 @@ print(blt_ins['range'])
 #Python 2 version
 def Interaction_module(clara_feedback,cleaned_feedback, blt, args):
 	print(blt +":- This is the builtin function where you have gone wrong")
-	speak = "You have used"+blt+"function incorrectly specifically to this problem statement."
+	speak = "This is the,"+blt+"function.specifically to this problem statement."
 	speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 	speech_obj.save('wit_bot.mp3')
 	playsound('wit_bot.mp3', True)
 
-	print("Probably you might have passed incorrect values as parameter")
+	print("Probably you might have passed incorrect values as parameter, or haven't made use of this function.")
 	print("Would you prefer having a quick glance at the explanation about the " + blt+"?")
 	print("yes/no\n")
 	reply_2 = input()

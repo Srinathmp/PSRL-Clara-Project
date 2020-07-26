@@ -424,3 +424,71 @@ operator_entity = {
 (not) Called Logical NOT Operator. It is used to reverse the logical state of its operand. If a condition is true, then Logical NOT operator will make it false. Eg : not(A and B) is true.\n
 """
 }
+
+local_variable = {
+    'contents':"""
+    A variable declared inside the function's body or in the local scope is known as a local variable.
+
+    Example:
+    def foo():
+    y = "local"
+
+
+    foo()
+    print(y)
+
+    output : NameError: name 'y' is not defined
+    The output shows an error because we are trying to access a local variable y in a global scope whereas the local variable only works inside foo() or local scope.
+    """
+}
+
+global_variable = {
+    'contents':"""
+    In Python, a variable declared outside of the function or in global scope is known as a global variable. This means that a global variable can be accessed inside or outside of the function.
+   
+    Example:
+    x = "global"
+
+    def foo():
+        print("x inside:", x)
+
+
+    foo()
+    print("x outside:", x)
+
+    output :
+    x inside: global
+    x outside: global
+    """
+}
+
+nonlocal_variables = {
+'contents':"""
+
+Nonlocal variables are used in nested functions whose local scope is not defined. This means that the variable can be neither in the local nor the global scope.
+
+We use nonlocal keyword to create nonlocal variables.
+
+Example:
+def outer():
+    x = "local"
+
+    def inner():
+        nonlocal x
+        x = "nonlocal"
+        print("inner:", x)
+
+    inner()
+    print("outer:", x)
+
+
+outer()
+
+output:
+inner: nonlocal
+outer: nonlocal
+
+In the above code, there is a nested inner() function. We use nonlocal keywords to create a nonlocal variable. The inner() function is defined in the scope of another function outer().
+"""
+}
+

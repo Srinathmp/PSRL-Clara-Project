@@ -1,9 +1,6 @@
 #Linking the entities identified with the explanation to provide from documentation
 
 from New_functions.interaction import conversation
-import pyttsx3
-# initialisation 
-engine = pyttsx3.init()
 
 ### Using google text to speech
 from gtts import gTTS
@@ -105,7 +102,6 @@ def recognise_and_explain(entities, lang, ask):
 				print("Sorry...couldn't interpret your query")
 			speech_obj = gTTS(text = speak, lang = language, slow=rate)
 			speech_obj.save('wit_bot.mp3')
-			#os.system("mpg123 wit_bot.mp3")
 			playsound('wit_bot.mp3', True)
 
 			ask = ask + 1
@@ -115,10 +111,8 @@ def recognise_and_explain(entities, lang, ask):
 		speak = "Have a Good day. Happy learning and coding!"
 		speech_obj = gTTS(text = speak, lang = language, slow=rate)
 		speech_obj.save('wit_bot.mp3')
-		#os.system("mpg123 wit_bot.mp3")
 		playsound('wit_bot.mp3', True)
-		# print("\n***Happing Learning***\n")
-		sys.exit("\n***Happing Learning***\n")
+		sys.exit("\n***Happy Learning***\n")
 
 
 	except Exception as err:

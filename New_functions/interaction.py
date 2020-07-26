@@ -50,7 +50,7 @@ def conversation(entities, lang):
 						print("\n****************************************************\n")
 
 						### For variables there are multiple functions to be called as per user preference
-						if entity == 'variables' and lang == 'c':
+						if lang == 'c' and entity == 'variables':
 							# Storing the functions to different variable categories
 							categories = [local_variable_func, global_variable_func, static_variable_func, automatic_variable_func, external_variable_func]
 							print("\n***Note : There are categories of variables supported in",prog_lang,"press 1 to read about them, else press any key to continue")

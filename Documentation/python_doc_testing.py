@@ -313,6 +313,35 @@ def operator_function():
 		else:
 			print('Invalid response')
 
+###Functions to handle variables in python 
+def variables_in_python():
+	print("Local Variables:")
+	speak = "Displaying about the local variables."
+	speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+	speech_obj.save('wit_bot.mp3')
+	playsound('wit_bot.mp3', True)
+	print("\n-----------------------------------------------------------------------\n")
+	print(local_variable['contents'])
+	print("\n-----------------------------------------------------------------------\n")
+
+	print("Global Variables:")
+	speak = "Displaying about the global variables."
+	speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+	speech_obj.save('wit_bot.mp3')
+	playsound('wit_bot.mp3', True)
+	print("\n-----------------------------------------------------------------------\n")
+	print(global_variable['contents'])
+	print("\n-----------------------------------------------------------------------\n")
+
+	print("Non-local variable:")
+	speak = "Displaying about the non-local variables."
+	speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+	speech_obj.save('wit_bot.mp3')
+	playsound('wit_bot.mp3', True)
+	print("\n-----------------------------------------------------------------------\n")
+	print(nonlocal_variables['contents'])
+	print("\n-----------------------------------------------------------------------\n")
+
 ### To display the list of all the documentations available
 def available_documentation():
 	all_doc = ['if statement','else statement','elif statement','nested if statement','range function','break and continue statements and else clauses on loops','while loop','for loop',
