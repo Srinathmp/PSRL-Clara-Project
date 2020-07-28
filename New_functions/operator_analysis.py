@@ -63,10 +63,10 @@ def explain_in_brief(category, documentation):
 def feedback_comp_operator(segments, operator,clara_feedback,cleaned_feedback,ins, args):
 	op = operator.split(' (')[1].split(')')[0]
 	if op in segments[0]:
-		speak = "Looks like you have used an incorrect relational operator."
+		speak = "Looks like you have used an incorrect relational operator, or this operator might not be required."
 		speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 		speech_obj.save('wit_bot.mp3')
-		print("Looks like you have used an incorrect relational operator")
+		print("Looks like you have used an incorrect relational operator, or this operator might not be required.")
 		playsound('wit_bot.mp3', True)
 		###Calling function to take user preference
 		explain_in_brief("relational operator", relational_op.__doc__)
@@ -111,10 +111,10 @@ def feedback_comp_operator(segments, operator,clara_feedback,cleaned_feedback,in
 def feedback_arth_operator(segments,operator,clara_feedback,cleaned_feedback, ins, args): #depending on whether args passed or ins passed use accordingly one of them will be None
 	op = operator.split(' (')[1].split(')')[0]
 	if op in segments[0]:
-		speak = "Looks like you have used an incorrect arithmetic operator."
+		speak = "Looks like you have used an incorrect arithmetic operator, or this operator might not be required."
 		speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 		speech_obj.save('wit_bot.mp3')
-		print("Looks like you have used an incorrect arithmetic operator")
+		print("Looks like you have used an incorrect arithmetic operator, or this operator might not be required.")
 		playsound('wit_bot.mp3', True)
 		###Calling function to take user preference
 		explain_in_brief("arithmetic operator", arithmetic_op.__doc__)

@@ -35,6 +35,7 @@ def recognise_and_explain(entities, lang, ask):
 		# rate for speed of speech(True - slow, False = fast) 
 		rate = False 
 		if entities:
+			# print("got entities", entities)
 			if 'available_documentation:available_documentation' in entities:
 				speak = "Displaying the list of available documentations."
 				speech_obj = gTTS(text = speak, lang = language, slow=rate)
@@ -64,9 +65,13 @@ def recognise_and_explain(entities, lang, ask):
 			relevant_entities = []
 			speak = "From the query obtained, the keyterms recognized, relevant to."+prog_lang+"are."
 			print("\nFrom the query obtained, the keyterms recognized relevant to the",prog_lang,"are:")
+			speech_obj = gTTS(text = speak, lang = language, slow=rate)
+			speech_obj.save('wit_bot.mp3')
+			playsound('wit_bot.mp3', True)
 
 			for i in range(len(entities)):
 				entities[i] = (entities[i].split(':')[0]).replace('_entity', '')
+				entities[i] = entities[i].replace('_', ' ')
 				flag = 0 ### Represents entity found not relevant to the programming language that the user is using
 				for doc in all_docs:
 					# print("entity: ", entities[i])
@@ -74,20 +79,35 @@ def recognise_and_explain(entities, lang, ask):
 					if entities[i] in doc:
 						flag = 1
 						break
+				if lang == 'c' and entities[i] == 'break and continue statements and else clauses on loops':
+					entity_name = 'break and continue statements'
+				else:
+					entity_name = entities[i]
 				if flag:
-					print('=>',entities[i])
-					speak += entities[i]
+					print('\n***=>',entity_name,"Is relevant to the",prog_lang)
+					speak = entity_name
+					speak += ".Is relevant."
 					speech_obj = gTTS(text = speak, lang = language, slow=rate)
 					speech_obj.save('wit_bot.mp3')
 					playsound('wit_bot.mp3', True)
-					relevant_entities.append(entities[i])
+					relevant_entities.append(entity_name)
+				else:
+					print("\nNote:",entity_name, "might not be relevant to the",prog_lang)
+					print("In order to avoid confussion explanation cannot be provided specific to the",entities[i],"keyterm.")
+					speak = entities[i]+".might not be relevant to the." + prog_lang
+					speak += "In order to avoid confussion explanation cannot be provided specific to the"+entities[i]+"keyterm."
+					speech_obj = gTTS(text = speak, lang = language, slow=rate)
+					speech_obj.save('wit_bot.mp3')
+					playsound('wit_bot.mp3', True)
 
-			speak = "To strengthen the conceptual understanding,"
-			speak += "Please go through the detailed explanation of these."
-			speech_obj = gTTS(text = speak, lang = language, slow=rate)
-			speech_obj.save('wit_bot.mp3')
-			
-			playsound('wit_bot.mp3', True)
+
+			if relevant_entities != []:
+				speak = "To strengthen the conceptual understanding,"
+				speak += "Please go through the detailed explanation of these."
+				speech_obj = gTTS(text = speak, lang = language, slow=rate)
+				speech_obj.save('wit_bot.mp3')
+				
+				playsound('wit_bot.mp3', True)
 			
 			reading = 1
 			while(reading):
@@ -106,7 +126,6 @@ def recognise_and_explain(entities, lang, ask):
 
 			ask = ask + 1
 			return ask
-
 
 		speak = "Have a Good day. Happy learning and coding!"
 		speech_obj = gTTS(text = speak, lang = language, slow=rate)

@@ -71,7 +71,7 @@ def RecognizeSpeech_during_interaction(AUDIO_FILENAME, num_seconds):
         sample_text = sample_text.replace("\'", "")
         # print('original text = ',text)
         if sample_text == "":
-            sys.exit("You didn't give any query")
+            sys.exit("\n**You didn't give any query**\n")
 
         final_request = curl_request+sample_text+"'"
         # print('curl_request = ',final_request)
@@ -87,6 +87,7 @@ def RecognizeSpeech_during_interaction(AUDIO_FILENAME, num_seconds):
         # print('standard output=',stdout)
         # print('final output=',type(stdout))
         final_dict =json.loads(stdout)
+        print(final_dict)
         if final_dict['intents']:
         	response.append(final_dict['intents'][0]['name'])
         else:
@@ -96,6 +97,6 @@ def RecognizeSpeech_during_interaction(AUDIO_FILENAME, num_seconds):
         else:
         	response.append(None)
     #-----------------------------------------------------------
-    print("\nYour final query: {}".format(text))
+    # print("\nYour final query: {}".format(text))
     # return the entity list
     return response

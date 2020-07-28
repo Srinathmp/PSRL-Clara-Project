@@ -72,7 +72,7 @@ def RecognizeSpeech(AUDIO_FILENAME, num_seconds):
         sample_text = sample_text.replace("\'", "")
         # print('original text = ',text)
         if sample_text == "":
-            sys.exit("You didn't give any query")
+            sys.exit("\n**You didn't give any query**\n")
 
         final_request = curl_request+sample_text+"'"
         # print('curl_request = ',final_request)
@@ -89,6 +89,7 @@ def RecognizeSpeech(AUDIO_FILENAME, num_seconds):
         # print('final output=',type(stdout))
         final_dict =json.loads(stdout)
         #print('final_dict = ',(final_dict['entities'].keys()))
+        print(final_dict)
         entities = list((final_dict['entities'].keys()))
     #-----------------------------------------------------------
     if text == 'Did not receive any input.':

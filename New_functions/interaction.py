@@ -15,7 +15,7 @@ def conversation(entities, lang):
 			#Importing functions relevant to variables
 			from Documentation.doc_testing import variable_func, local_variable_func, global_variable_func, static_variable_func, automatic_variable_func, external_variable_func
 			entity_func_dict = {'else': else_statement_func,'if':if_statement_func,'array':array_doc_func, 
-				'for':for_loop_func, 'while':while_loop_func, 'break_and_continue_statements_and_else_clauses_on_loops':break_and_continue_func,
+				'for':for_loop_func, 'while':while_loop_func, 'break and continue statements':break_and_continue_func,
 				'return':return_func, 'operator':operator_function, 'variables':variable_func}
 
 		elif lang == 'py':
@@ -23,8 +23,8 @@ def conversation(entities, lang):
 			from Documentation.python_doc_testing import if_statement_func, else_statement_func, elif_statement_func, python_nested_if_statements_func, for_loop_func,available_documentation
 			from Documentation.python_doc_testing import range_function_func,break_and_continue_statements_and_else_clauses_on_loops_func, while_loop_func, list_doc_func, return_func, operator_function
 			entity_func_dict = {'elif':elif_statement_func, 'else': else_statement_func,
-							 'for':for_loop_func, 'if':if_statement_func, 'nested_if':python_nested_if_statements_func,
-							 'range':range_function_func,'break_and_continue_statements_and_else_clauses_on_loops':break_and_continue_statements_and_else_clauses_on_loops_func,
+							 'for':for_loop_func, 'if':if_statement_func, 'nested if':python_nested_if_statements_func,
+							 'range':range_function_func,'break and continue statements and else clauses on loops':break_and_continue_statements_and_else_clauses_on_loops_func,
 							 'while':while_loop_func, 'list':list_doc_func,'return':return_func, 'operator':operator_function}
 		status = 0
 		for entity in entities:
@@ -85,13 +85,15 @@ def conversation(entities, lang):
 					playsound('wit_bot.mp3', True)
 					sys.exit("\n***Happy Coding***\n")
 
-			print("\nIf you would like to revisit the keywords recognised, to read further,press 1, else press 0 to exit\n")
+			print("\nIf you would like to revisit the keywords recognised or read further about other possible recognised terms,press 1, else press 0 to exit\n")
 			speak = "To revisit the keywords recognised for explanation,press 1, else press 0 to exit"
 			speech_obj = gTTS(text = speak, lang = language, slow=rate)
 			speech_obj.save('wit_bot.mp3')
 			
 			playsound('wit_bot.mp3', True)
 			status = int(input())
+			if status == 0:
+				break
 		return status
 	except Exception as err:
 		print("Exception arose is ", err)

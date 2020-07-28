@@ -68,7 +68,11 @@ def ift_feedback(clara_feedback,cleaned_feedback, ins,args, lang):
 						python_nested_if_statements_func()
 					else:
 						print('Invalid choice, choose one from above options')
-					print("Select choice to further continue reading, else 0 to quit\n")
+					print("\nSelect from the options below if you wish to read more, else 0 to quit\n")
+					print("1 : IF statements")
+					print("2 : ELSE statements")
+					print("3 : ELIF statements")
+					print("4 : Nested IF statements")
 					choice = input()
 					print("\n---------------------------------------------------------------------------------------------------\n")
 			except exception as err:

@@ -359,7 +359,12 @@ def feedback_channelizer(clara_feedback, feed_no, programs,rep_prog, inter, inpu
 						return feedback_incorrect_value(num1[0], num2[0], clara_feedback,cleaned_feedback, inputs, arguements)
 				elif num1 != [] or num2 != []:
 					print("There might be an incorrect initialization.")
-					print("It is recommended that you dry run through code look for right initialization")
+					speak = "There might be an incorrect initialization."
+					speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+					speech_obj.save('wit_bot.mp3')
+					playsound('wit_bot.mp3', True)
+					
+					print("It is recommended that you dry run through code and look for right initialization")
 					print("Repair to this has been generated, press 1 to see repair or 0 to exit")
 					reply2 = input()
 					if(reply2 == '1'):

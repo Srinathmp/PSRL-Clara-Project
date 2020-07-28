@@ -148,18 +148,23 @@ def while_loop_func():
 	
 
 def break_and_continue_func():
-	print("Definition of break keyword :\n",break_and_continue['definition of break'])
-	speak = "The brief definition of break and continue keywords are."
-	speak += "Defintion of Break."
-	speak += break_and_continue['definition of break']
-	print("Definition of continue keyword :\n", break_and_continue['Defintion of continue'])
-	speak += "Now providing definition of continue"
-	speak += break_and_continue['Defintion of continue']
+	# print("Definition of break keyword :\n",break_and_continue['definition of break'])
+	# speak = "The brief definition of break and continue keywords are."
+	# speak += "Defintion of Break."
+	# speak += break_and_continue['definition of break']
+	# print("Definition of continue keyword :\n", break_and_continue['defintion of continue'])
+	# speak += "Now providing definition of continue"
+	# speak += break_and_continue['defintion of continue']
+	# speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+	# speech_obj.save('wit_bot.mp3')
+	# #os.system("mpg123 wit_bot.mp3")
+	# playsound('wit_bot.mp3', True)
+
+	speak = "What would you like to know about from the categories mentioned below."
 	speech_obj = gTTS(text = speak, lang = 'en', slow=False)
 	speech_obj.save('wit_bot.mp3')
 	#os.system("mpg123 wit_bot.mp3")
 	playsound('wit_bot.mp3', True)
-
 	print('What would you like to know about break and continue ?')
 	print('The subcategories available are :')
 	dict_keys = list(break_and_continue.keys())
@@ -380,9 +385,9 @@ def available_documentation():
 	for i in range(len(all_doc)):
 		print(i+1,': ',all_doc[i])
 
-### Just returning the list of documentations
+### Just returning the list of documentations, to consider the similarity had to include else clause with break and continue, to match as entity
 def documentation_list():
-	all_doc = ['if statement','else statement','break and continue statements ','while loop','for loop',
+	all_doc = ['if statement','else statement','break and continue statements and else clauses on loops','while loop','for loop',
 			'array data structure','return statement','local variables','global variables','static variables','external variables','automatic variables']
 
 	return all_doc

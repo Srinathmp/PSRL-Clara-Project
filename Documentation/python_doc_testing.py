@@ -161,6 +161,9 @@ def range_function_func():
 
 # python_nested_if_statements_func()
 def break_and_continue_statements_and_else_clauses_on_loops_func():
+	speak = "What would you like to know about from the categories mentioned below."
+	speech_obj = gTTS(text = speak, lang = 'en', slow=False)
+	speech_obj.save('wit_bot.mp3')
 	print('What would you like to know about break and continue statements and else clauses on loops ?')
 	print('The subcategories available are :')
 	dict_keys = list(break_and_continue_statements_and_else_clauses_on_loops.keys())

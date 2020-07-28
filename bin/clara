@@ -431,6 +431,9 @@ Options are:
                 print("\n***NOTE*** : Press 1 to interact with the bot, else any other key to exit: \n")
                 done = input()
                 if(done == '1'):
+                    print("\n******************************\n")
+                    print("          WELCOME!         ")
+                    print("\n******************************\n")
                     print("Would you like to ask some programming queries with the bot?")
                     # print("Press 1 to ask, else press any key to exit")
                     speak = "Welcome !....to the bot interaction mode. Do you have some queries?"

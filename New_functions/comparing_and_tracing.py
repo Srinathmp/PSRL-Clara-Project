@@ -78,7 +78,7 @@ def incorrect_return(programs,rep_prog, inter, args, ins):
 	###Calling function to take user preference
 	explain_in_brief("return expressions", return_explanation.__doc__)
 
-	print("Press 1 to continue with comparing correct and incorrect return value, once you are done reading.\n")
+	print("Press 1 to continue with comparing correct and incorrect return value.\n")
 	print("NOTE : Press 1 only if given programming template for this problem is followed, else press any key to continue\n")
 	reply = input()
 	if reply == '1':
