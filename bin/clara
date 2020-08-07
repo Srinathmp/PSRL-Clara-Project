@@ -91,7 +91,6 @@ Options are:
         '''
         Prints usage information (to stderr).
         '''
-
         print(self.USAGE % (sys.argv[0],), file=sys.stderr)
 
     def debug(self, msg, *args):

@@ -35,7 +35,7 @@ def RecognizeSpeech(AUDIO_FILENAME, num_seconds):
     # record audio of specified length in specified audio file
     record_audio(num_seconds, AUDIO_FILENAME)
 
-    # reading audio
+    # reading audio, speech converted to text
     audio = read_audio(AUDIO_FILENAME)
 
     # defining headers for HTTP request
