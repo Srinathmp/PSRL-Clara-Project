@@ -13,6 +13,9 @@ programming assignments, described in the following paper:
 Dependencies
 ============
 - C compiler
+- gTTS 2.1.1
+- playsound 1.2.2
+- pyaudio 0.2.11
 - Cython
   - `$ sudo aptitude install cython` (Debian)
   - `# dnf install Cython` (Fedora)
