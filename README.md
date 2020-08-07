@@ -35,6 +35,9 @@ Development
 ===========
 - Create a new virtual environment (using `virtualenv`)
 - Install `Cython` (using `pip install Cython` inside the new virtual enviroment)
+- Install `gTTS` (using `pip install gTTS` inside the new virtual environment)
+- Install `playsound` (using `pip install playsound` inside the new virtual environment)
+- Install `pyAudio` (using `pip install pyaudio` inside the new virtual environment)
 - Run `python setup.py develop`
 
 
