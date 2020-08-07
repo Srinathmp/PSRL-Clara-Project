@@ -15,7 +15,8 @@ Dependencies
 - C compiler
 - gTTS 2.1.1
 - playsound 1.2.2
-- pyaudio 0.2.11
+- pyAudio 0.2.11
+- vext 0.7.3
 - Cython
   - `$ sudo aptitude install cython` (Debian)
   - `# dnf install Cython` (Fedora)
