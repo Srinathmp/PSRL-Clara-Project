@@ -1,1 +1,4 @@
 Cython
+gTTS
+playsound
+pyAudio
