@@ -85,11 +85,9 @@ def RecognizeSpeech(AUDIO_FILENAME, num_seconds):
                              stderr=subprocess.PIPE,
                              universal_newlines=True)
         stdout, stderr = process.communicate()
-        # print('standard output=',stdout)
-        # print('final output=',type(stdout))
         final_dict =json.loads(stdout)
-        #print('final_dict = ',(final_dict['entities'].keys()))
-        print(final_dict)
+        #Uncomment to see the entities recognised from speech
+        #print(final_dict)
         entities = list((final_dict['entities'].keys()))
     #-----------------------------------------------------------
     if text == 'Did not receive any input.':
