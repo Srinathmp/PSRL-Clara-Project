@@ -84,10 +84,9 @@ def RecognizeSpeech_during_interaction(AUDIO_FILENAME, num_seconds):
                              stderr=subprocess.PIPE,
                              universal_newlines=True)
         stdout, stderr = process.communicate()
-        # print('standard output=',stdout)
-        # print('final output=',type(stdout))
         final_dict =json.loads(stdout)
-        print(final_dict)
+        ## Uncomment to see, the intents recognised
+        # print(final_dict)
         if final_dict['intents']:
         	response.append(final_dict['intents'][0]['name'])
         else:
