@@ -16,7 +16,6 @@ Dependencies
 - gTTS 2.1.1
 - playsound 1.2.2
 - pyAudio 0.2.11
-- vext 0.7.3
 - Cython
   - `$ sudo aptitude install cython` (Debian)
   - `# dnf install Cython` (Fedora)
@@ -34,10 +33,7 @@ Installation & running
 Development
 ===========
 - Create a new virtual environment (using `virtualenv`)
-- Install `Cython` (using `pip install Cython` inside the new virtual enviroment)
-- Install `gTTS` (using `pip install gTTS` inside the new virtual environment)
-- Install `playsound` (using `pip install playsound` inside the new virtual environment)
-- Install `pyAudio` (using `pip install pyaudio` inside the new virtual environment)
+- Install all dependencies inside virtual environment using `pip install -r requirements.txt`
 - Run `python setup.py develop`
 
 
